@@ -245,13 +245,11 @@ object dm: Tdm
       ''
       ''
       'INSERT INTO payments'
-      
-        #9'(payment_date, payment_type, amount, exchange_rate, usd_equival' +
-        'ent, currency, booking_id)'
+      #9'(payment_date, payment_type, amount, currency, booking_id)'
       #9'VALUES'
-      #9'('#39'2024-01-15'#39', '#39'Cash'#39', 55, 1, 55, '#39'USD'#39', 1),'
-      #9'('#39'2024-02-10'#39', '#39'Crypto'#39', 146.22, 1, 146.22 , '#39'USDT'#39', 2),'
-      #9'('#39'2024-06-22'#39', '#39'Credit Card'#39', 89.99,1, 89.99, '#39'USD'#39', 3)'
+      #9'('#39'2024-01-15'#39', '#39'Cash'#39', 55, '#39'USD'#39', 1),'
+      #9'('#39'2024-02-10'#39', '#39'Crypto'#39', 146.22, '#39'USDT'#39', 2),'
+      #9'('#39'2024-06-22'#39', '#39'Credit Card'#39', 89.99, '#39'USD'#39', 3)'
       #9';')
     Left = 32
     Top = 80

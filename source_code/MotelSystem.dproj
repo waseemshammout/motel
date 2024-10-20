@@ -118,6 +118,9 @@
             <Form>frmBookings</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uPayments.pas">
+            <Form>frmPayments</Form>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

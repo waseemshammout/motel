@@ -62,7 +62,7 @@ object frmBookings: TfrmBookings
     Top = 95
     Width = 1020
     Height = 329
-    ActivePage = TabSheet1
+    ActivePage = TabSheet4
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
@@ -304,7 +304,6 @@ object frmBookings: TfrmBookings
         Top = 204
         Width = 154
         Height = 27
-        CustomHint = BalloonHint1
         DataField = 'rate_per_night'
         DataSource = DataSource1
         Font.Charset = DEFAULT_CHARSET
@@ -378,15 +377,14 @@ object frmBookings: TfrmBookings
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goFixedRowDefAlign]
         TabOrder = 2
       end
-      object btnPopulate: TButton
+      object Button3: TButton
         Left = 379
-        Top = 3
+        Top = 11
         Width = 75
         Height = 25
         Caption = 'Populate'
         TabOrder = 3
-        Visible = False
-        OnClick = btnPopulateClick
+        OnClick = Button3Click
       end
     end
     object TabSheet3: TTabSheet
@@ -565,7 +563,7 @@ object frmBookings: TfrmBookings
     Width = 90
     Height = 25
     Caption = 'Check In'
-    ImageIndex = 2
+    ImageIndex = 1
     Images = ImageList1
     TabOrder = 4
     OnClick = btnCheckInClick
@@ -576,7 +574,7 @@ object frmBookings: TfrmBookings
     Width = 90
     Height = 25
     Caption = 'Check Out'
-    ImageIndex = 3
+    ImageIndex = 2
     Images = ImageList1
     TabOrder = 5
     OnClick = btnCheckOutClick
@@ -587,7 +585,7 @@ object frmBookings: TfrmBookings
     Width = 90
     Height = 25
     Caption = 'Cancel'
-    ImageIndex = 4
+    ImageIndex = 3
     Images = ImageList1
     TabOrder = 6
     OnClick = btnCancelClick

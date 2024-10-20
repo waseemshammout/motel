@@ -29,7 +29,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uMain, uRooms, uBookings;
+uses uMain, uRooms, uBooking;
 
 {$R *.dfm}
 

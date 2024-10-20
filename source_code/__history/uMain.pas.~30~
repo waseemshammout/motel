@@ -25,7 +25,6 @@ type
     procedure btnRoomsClick(Sender: TObject);
     procedure btnBookingsClick(Sender: TObject);
     procedure btnExitClick(Sender: TObject);
-    procedure btnPaymentsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,7 +37,7 @@ var
 implementation
 
 uses
-  uRooms, uDataModule, uBookings, uPayments;
+  uRooms, uDataModule, uBookings;
 
 {$R *.dfm}
 
@@ -52,12 +51,6 @@ end;
 procedure TfrmMain.btnExitClick(Sender: TObject);
 begin
   Application.Terminate;
-end;
-
-procedure TfrmMain.btnPaymentsClick(Sender: TObject);
-begin
-  if not Assigned(frmPayments) then  frmPayments := TfrmPayments.Create(self);
-  frmPayments.Show;
 end;
 
 procedure TfrmMain.btnRoomsClick(Sender: TObject);

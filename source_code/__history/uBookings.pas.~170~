@@ -221,7 +221,7 @@ begin
       CommandText.Text := 'Delete from booking_guests_details where id = ' +
         sgGuests.Cells[0, sgGuests.Row];
       Execute();
-      btnPopulateClick(Self);
+      Button3Click(Self);
     end;
 end;
 

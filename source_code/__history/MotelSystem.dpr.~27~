@@ -8,7 +8,7 @@ uses
   uRooms in 'uRooms.pas' {frmRooms},
   uDataModule in 'uDataModule.pas' {dm: TDataModule},
   uBookings in 'uBookings.pas' {frmBookings},
-  uPayments in 'uPayments.pas' {frmPayments};
+  uPayments in 'uPayments.pas' {Form1};
 
 {$R *.res}
 
@@ -18,5 +18,6 @@ begin
   TStyleManager.TrySetStyle('Charcoal Dark Slate');
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(Tdm, dm);
+  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

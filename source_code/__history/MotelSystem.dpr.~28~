@@ -18,5 +18,6 @@ begin
   TStyleManager.TrySetStyle('Charcoal Dark Slate');
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(Tdm, dm);
+  Application.CreateForm(TfrmPayments, frmPayments);
   Application.Run;
 end.
