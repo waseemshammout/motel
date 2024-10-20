@@ -1,0 +1,54 @@
+unit uDataModule;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.PG,
+  FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet;
+
+type
+  Tdm = class(TDataModule)
+    FDConnection1: TFDConnection;
+    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
+    dsRoomFacilities: TFDQuery;
+    dsRooms: TFDQuery;
+    dsRoomsroom_id: TIntegerField;
+    dsRoomsroom_number: TWideStringField;
+    dsRoomsdescription: TWideMemoField;
+    dsRoomsstandard_rate_per_night: TFMTBCDField;
+    dsRoomsbeds: TIntegerField;
+    dsRoomsmax_capacity_guests: TIntegerField;
+    dsRoomshas_kitchen: TBooleanField;
+    dsRoomshas_bath: TBooleanField;
+    dsRoomshas_fridge: TBooleanField;
+    dsRoomshas_safe: TBooleanField;
+    dsRoomshas_tv: TBooleanField;
+    dsRoomsroom_status: TWideStringField;
+    procedure FDConnection1BeforeConnect(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dm: Tdm;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses uMain, uRooms, uBooking;
+
+{$R *.dfm}
+
+procedure Tdm.FDConnection1BeforeConnect(Sender: TObject);
+begin
+ FDConnection1.Params.Values['search_path'] := 'sandbox';
+end;
+
+end.
