@@ -101,30 +101,18 @@ object frmPayments: TfrmPayments
   object Label4: TLabel
     Left = 380
     Top = 173
-    Width = 81
-    Height = 14
+    Width = 77
+    Height = 15
     Caption = 'Exchange Rate'
     FocusControl = dbExchangeRate
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Roboto'
-    Font.Style = []
-    ParentFont = False
   end
   object Label8: TLabel
     Left = 560
     Top = 173
-    Width = 83
-    Height = 14
+    Width = 80
+    Height = 15
     Caption = 'USD Equivalent'
     FocusControl = edUSDEquivalent
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Roboto'
-    Font.Style = []
-    ParentFont = False
   end
   object edPaymentNum: TDBEdit
     Left = 8
@@ -238,6 +226,7 @@ object frmPayments: TfrmPayments
     Top = 194
     Width = 181
     Height = 27
+    Style = csDropDownList
     DataField = 'currency'
     DataSource = DataSource1
     Font.Charset = DEFAULT_CHARSET
@@ -279,7 +268,6 @@ object frmPayments: TfrmPayments
     TabOrder = 8
   end
   object tbPayments: TFDTable
-    AfterScroll = tbPaymentsAfterScroll
     IndexFieldNames = 'payment_id'
     Connection = dm.con
     ResourceOptions.AssignedValues = [rvEscapeExpand]

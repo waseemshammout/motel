@@ -80,7 +80,7 @@ end;
 
 procedure TfrmPayments.cmbTypeChange(Sender: TObject);
 begin
-  UpdateCurrencyList();
+ UpdateCurrencyList();
 end;
 
 procedure TfrmPayments.FormCreate(Sender: TObject);
@@ -90,16 +90,11 @@ end;
 
 procedure TfrmPayments.tbPaymentsAfterScroll(DataSet: TDataSet);
 begin
-  try
-    UpdateCurrencyList();
-    if not VarIsNull(edPaymentDate.Text) or (edPaymentDate.Text = '') then
-      DateTimePicker1.Date := StrToDate(edPaymentDate.Text)
-    else
-      DateTimePicker1.Date := Date;
-  except
-    on EConvertError do
-      DateTimePicker1.Date := Date;
-  end;
+ UpdateCurrencyList();
+ if not VarIsNull(edPaymentDate.Text) then
+  DateTimePicker1.Date := StrToDate(edPaymentDate.Text)
+ else
+  DateTimePicker1.Date := Date;
 end;
 
 end.

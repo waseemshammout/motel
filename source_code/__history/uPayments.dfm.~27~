@@ -4,24 +4,25 @@ object frmPayments: TfrmPayments
   BorderStyle = bsNone
   Caption = 'Payments'
   ClientHeight = 480
-  ClientWidth = 640
+  ClientWidth = 759
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
-  Font.Name = 'Segoe UI'
+  Font.Name = 'Default'
   Font.Style = []
   FormStyle = fsMDIChild
   Visible = True
   WindowState = wsMaximized
+  OnCreate = FormCreate
   TextHeight = 15
   object Label2: TLabel
-    Left = 88
-    Top = 92
+    Left = 8
+    Top = 20
     Width = 69
     Height = 14
     Caption = 'Payment No.'
-    FocusControl = DBEdit2
+    FocusControl = edPaymentNum
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -30,26 +31,12 @@ object frmPayments: TfrmPayments
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 226
+    Left = 8
     Top = 92
     Width = 25
     Height = 14
     Caption = 'Date'
-    FocusControl = DBEdit3
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Roboto'
-    Font.Style = []
-    ParentFont = False
-  end
-  object Label4: TLabel
-    Left = 88
-    Top = 148
-    Width = 26
-    Height = 14
-    Caption = 'Type'
-    FocusControl = DBEdit4
+    FocusControl = edPaymentDate
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -58,12 +45,12 @@ object frmPayments: TfrmPayments
     ParentFont = False
   end
   object Label5: TLabel
-    Left = 226
-    Top = 148
+    Left = 216
+    Top = 174
     Width = 43
     Height = 14
     Caption = 'Amount'
-    FocusControl = DBEdit5
+    FocusControl = edAmount
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -72,12 +59,24 @@ object frmPayments: TfrmPayments
     ParentFont = False
   end
   object Label6: TLabel
-    Left = 88
-    Top = 204
+    Left = 8
+    Top = 174
     Width = 48
     Height = 14
     Caption = 'Currency'
-    FocusControl = DBEdit6
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Roboto'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 380
+    Top = 92
+    Width = 45
+    Height = 14
+    Caption = 'Booking'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -86,12 +85,12 @@ object frmPayments: TfrmPayments
     ParentFont = False
   end
   object Label7: TLabel
-    Left = 226
-    Top = 204
-    Width = 45
+    Left = 216
+    Top = 92
+    Width = 26
     Height = 14
-    Caption = 'Booking'
-    FocusControl = DBEdit7
+    Caption = 'Type'
+    FocusControl = edAmount
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -99,10 +98,26 @@ object frmPayments: TfrmPayments
     Font.Style = []
     ParentFont = False
   end
-  object DBEdit2: TDBEdit
-    Left = 88
-    Top = 112
-    Width = 100
+  object Label4: TLabel
+    Left = 380
+    Top = 173
+    Width = 77
+    Height = 15
+    Caption = 'Exchange Rate'
+    FocusControl = dbExchangeRate
+  end
+  object Label8: TLabel
+    Left = 560
+    Top = 173
+    Width = 80
+    Height = 15
+    Caption = 'USD Equivalent'
+    FocusControl = edUSDEquivalent
+  end
+  object edPaymentNum: TDBEdit
+    Left = 8
+    Top = 40
+    Width = 137
     Height = 27
     DataField = 'payment_num'
     DataSource = DataSource1
@@ -114,10 +129,10 @@ object frmPayments: TfrmPayments
     ParentFont = False
     TabOrder = 0
   end
-  object DBEdit3: TDBEdit
-    Left = 226
-    Top = 112
-    Width = 100
+  object edPaymentDate: TDBEdit
+    Left = 8
+    Top = 145
+    Width = 181
     Height = 27
     DataField = 'payment_date'
     DataSource = DataSource1
@@ -127,27 +142,12 @@ object frmPayments: TfrmPayments
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
-    TabOrder = 1
-  end
-  object DBEdit4: TDBEdit
-    Left = 88
-    Top = 168
-    Width = 100
-    Height = 27
-    DataField = 'payment_type'
-    DataSource = DataSource1
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Roboto'
-    Font.Style = []
-    ParentFont = False
     TabOrder = 2
   end
-  object DBEdit5: TDBEdit
-    Left = 226
-    Top = 168
-    Width = 100
+  object edAmount: TDBEdit
+    Left = 216
+    Top = 194
+    Width = 127
     Height = 27
     DataField = 'amount'
     DataSource = DataSource1
@@ -157,12 +157,74 @@ object frmPayments: TfrmPayments
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 6
   end
-  object DBEdit6: TDBEdit
-    Left = 88
-    Top = 224
-    Width = 100
+  object DBNavigator1: TDBNavigator
+    Left = 8
+    Top = 307
+    Width = 490
+    Height = 25
+    DataSource = DataSource1
+    TabOrder = 9
+  end
+  object cmbBooking: TDBLookupComboBox
+    Left = 380
+    Top = 112
+    Width = 193
+    Height = 27
+    DataField = 'booking_id'
+    DataSource = DataSource1
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Roboto'
+    Font.Style = []
+    KeyField = 'booking_id'
+    ListField = 'booking_num'
+    ListSource = DataSource2
+    ParentFont = False
+    TabOrder = 4
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 8
+    Top = 112
+    Width = 186
+    Height = 27
+    Date = 45585.000000000000000000
+    Time = 0.919667025460512400
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Roboto'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+  end
+  object cmbType: TDBComboBox
+    Left = 216
+    Top = 112
+    Width = 145
+    Height = 27
+    Style = csDropDownList
+    DataField = 'payment_type'
+    DataSource = DataSource1
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Roboto'
+    Font.Style = []
+    Items.Strings = (
+      'Cash'
+      'Credit Card'
+      'Crypto')
+    ParentFont = False
+    TabOrder = 3
+    OnChange = cmbTypeChange
+  end
+  object cmbCurrency: TDBComboBox
+    Left = 8
+    Top = 194
+    Width = 181
     Height = 27
     DataField = 'currency'
     DataSource = DataSource1
@@ -172,14 +234,14 @@ object frmPayments: TfrmPayments
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 5
   end
-  object DBEdit7: TDBEdit
-    Left = 226
-    Top = 224
-    Width = 100
+  object dbExchangeRate: TDBEdit
+    Left = 380
+    Top = 194
+    Width = 154
     Height = 27
-    DataField = 'booking_id'
+    DataField = 'exchange_rate'
     DataSource = DataSource1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -187,19 +249,36 @@ object frmPayments: TfrmPayments
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 7
+  end
+  object edUSDEquivalent: TDBEdit
+    Left = 560
+    Top = 194
+    Width = 154
+    Height = 27
+    DataField = 'usd_equivalent'
+    DataSource = DataSource1
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Roboto'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 8
   end
   object tbPayments: TFDTable
+    AfterScroll = tbPaymentsAfterScroll
     IndexFieldNames = 'payment_id'
     Connection = dm.con
     ResourceOptions.AssignedValues = [rvEscapeExpand]
     TableName = 'payments'
-    Left = 392
-    Top = 432
+    Left = 24
+    Top = 344
     object tbPaymentspayment_id: TFDAutoIncField
       FieldName = 'payment_id'
       Origin = 'payment_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object tbPaymentspayment_num: TStringField
       FieldName = 'payment_num'
@@ -233,10 +312,34 @@ object frmPayments: TfrmPayments
       FieldName = 'created_at'
       Origin = 'created_at'
     end
+    object tbPaymentsexchange_rate: TFloatField
+      FieldName = 'exchange_rate'
+      Origin = 'exchange_rate'
+      Required = True
+    end
+    object tbPaymentsusd_equivalent: TFloatField
+      FieldName = 'usd_equivalent'
+      Origin = 'usd_equivalent'
+      Required = True
+    end
   end
   object DataSource1: TDataSource
     DataSet = tbPayments
-    Left = 448
-    Top = 432
+    Left = 96
+    Top = 344
+  end
+  object tbBooking: TFDTable
+    Active = True
+    IndexFieldNames = 'booking_id'
+    Connection = dm.con
+    ResourceOptions.AssignedValues = [rvEscapeExpand]
+    TableName = 'bookings'
+    Left = 576
+    Top = 104
+  end
+  object DataSource2: TDataSource
+    DataSet = tbBooking
+    Left = 640
+    Top = 104
   end
 end

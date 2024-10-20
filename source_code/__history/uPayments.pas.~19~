@@ -47,8 +47,6 @@ type
     edUSDEquivalent: TDBEdit;
     procedure FormCreate(Sender: TObject);
     procedure UpdateCurrencyList();
-    procedure cmbTypeChange(Sender: TObject);
-    procedure tbPaymentsAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -78,28 +76,9 @@ begin
     cmbCurrency.Items.AddStrings(cash_ccy);
 end;
 
-procedure TfrmPayments.cmbTypeChange(Sender: TObject);
-begin
-  UpdateCurrencyList();
-end;
-
 procedure TfrmPayments.FormCreate(Sender: TObject);
 begin
   tbPayments.Open;
-end;
-
-procedure TfrmPayments.tbPaymentsAfterScroll(DataSet: TDataSet);
-begin
-  try
-    UpdateCurrencyList();
-    if not VarIsNull(edPaymentDate.Text) or (edPaymentDate.Text = '') then
-      DateTimePicker1.Date := StrToDate(edPaymentDate.Text)
-    else
-      DateTimePicker1.Date := Date;
-  except
-    on EConvertError do
-      DateTimePicker1.Date := Date;
-  end;
 end;
 
 end.

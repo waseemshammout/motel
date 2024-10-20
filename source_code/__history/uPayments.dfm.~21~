@@ -45,7 +45,7 @@ object frmPayments: TfrmPayments
     ParentFont = False
   end
   object Label5: TLabel
-    Left = 216
+    Left = 206
     Top = 174
     Width = 43
     Height = 14
@@ -98,34 +98,6 @@ object frmPayments: TfrmPayments
     Font.Style = []
     ParentFont = False
   end
-  object Label4: TLabel
-    Left = 380
-    Top = 173
-    Width = 81
-    Height = 14
-    Caption = 'Exchange Rate'
-    FocusControl = dbExchangeRate
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Roboto'
-    Font.Style = []
-    ParentFont = False
-  end
-  object Label8: TLabel
-    Left = 560
-    Top = 173
-    Width = 83
-    Height = 14
-    Caption = 'USD Equivalent'
-    FocusControl = edUSDEquivalent
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Roboto'
-    Font.Style = []
-    ParentFont = False
-  end
   object edPaymentNum: TDBEdit
     Left = 8
     Top = 40
@@ -154,10 +126,10 @@ object frmPayments: TfrmPayments
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 1
   end
   object edAmount: TDBEdit
-    Left = 216
+    Left = 206
     Top = 194
     Width = 127
     Height = 27
@@ -169,15 +141,15 @@ object frmPayments: TfrmPayments
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
-    TabOrder = 6
+    TabOrder = 2
   end
   object DBNavigator1: TDBNavigator
     Left = 8
-    Top = 307
+    Top = 243
     Width = 490
     Height = 25
     DataSource = DataSource1
-    TabOrder = 9
+    TabOrder = 3
   end
   object cmbBooking: TDBLookupComboBox
     Left = 380
@@ -210,14 +182,13 @@ object frmPayments: TfrmPayments
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 5
   end
   object cmbType: TDBComboBox
     Left = 216
     Top = 112
     Width = 145
     Height = 27
-    Style = csDropDownList
     DataField = 'payment_type'
     DataSource = DataSource1
     Font.Charset = DEFAULT_CHARSET
@@ -230,7 +201,7 @@ object frmPayments: TfrmPayments
       'Credit Card'
       'Crypto')
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 6
     OnChange = cmbTypeChange
   end
   object cmbCurrency: TDBComboBox
@@ -246,46 +217,15 @@ object frmPayments: TfrmPayments
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
-    TabOrder = 5
-  end
-  object dbExchangeRate: TDBEdit
-    Left = 380
-    Top = 194
-    Width = 154
-    Height = 27
-    DataField = 'exchange_rate'
-    DataSource = DataSource1
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Roboto'
-    Font.Style = []
-    ParentFont = False
     TabOrder = 7
   end
-  object edUSDEquivalent: TDBEdit
-    Left = 560
-    Top = 194
-    Width = 154
-    Height = 27
-    DataField = 'usd_equivalent'
-    DataSource = DataSource1
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Roboto'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 8
-  end
   object tbPayments: TFDTable
-    AfterScroll = tbPaymentsAfterScroll
     IndexFieldNames = 'payment_id'
     Connection = dm.con
     ResourceOptions.AssignedValues = [rvEscapeExpand]
     TableName = 'payments'
-    Left = 24
-    Top = 344
+    Left = 8
+    Top = 288
     object tbPaymentspayment_id: TFDAutoIncField
       FieldName = 'payment_id'
       Origin = 'payment_id'
@@ -324,21 +264,11 @@ object frmPayments: TfrmPayments
       FieldName = 'created_at'
       Origin = 'created_at'
     end
-    object tbPaymentsexchange_rate: TFloatField
-      FieldName = 'exchange_rate'
-      Origin = 'exchange_rate'
-      Required = True
-    end
-    object tbPaymentsusd_equivalent: TFloatField
-      FieldName = 'usd_equivalent'
-      Origin = 'usd_equivalent'
-      Required = True
-    end
   end
   object DataSource1: TDataSource
     DataSet = tbPayments
-    Left = 96
-    Top = 344
+    Left = 64
+    Top = 288
   end
   object tbBooking: TFDTable
     Active = True
