@@ -6,6 +6,7 @@ object dm: Tdm
       'Database=C:\Users\Waseem\Desktop\bates\db\db.sdb'
       'LockingMode=Normal'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 16
