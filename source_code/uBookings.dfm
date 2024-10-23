@@ -2,8 +2,8 @@ object frmBookings: TfrmBookings
   Left = 0
   Top = 0
   Caption = 'Bookings'
-  ClientHeight = 531
-  ClientWidth = 1151
+  ClientHeight = 527
+  ClientWidth = 1149
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -47,15 +47,13 @@ object frmBookings: TfrmBookings
   end
   object DBNavigator1: TDBNavigator
     Left = 0
-    Top = 506
-    Width = 1151
+    Top = 502
+    Width = 1149
     Height = 25
     DataSource = DataSource1
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbEdit, nbPost, nbCancel, nbRefresh]
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 502
-    ExplicitWidth = 1149
   end
   object PageControl1: TPageControl
     Left = 21
