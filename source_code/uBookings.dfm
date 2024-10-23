@@ -54,6 +54,8 @@ object frmBookings: TfrmBookings
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbEdit, nbPost, nbCancel, nbRefresh]
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 498
+    ExplicitWidth = 1147
   end
   object PageControl1: TPageControl
     Left = 21

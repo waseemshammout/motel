@@ -182,10 +182,6 @@ begin
     PageControl1.ActivePageIndex := 0;
   except
     on EConvertError do
-    begin
-
-    end;
-
   end;
 end;
 

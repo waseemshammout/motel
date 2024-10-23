@@ -101,18 +101,43 @@ object frmPayments: TfrmPayments
   object Label4: TLabel
     Left = 380
     Top = 173
-    Width = 77
-    Height = 15
+    Width = 81
+    Height = 14
     Caption = 'Exchange Rate'
-    FocusControl = dbExchangeRate
+    FocusControl = edExchangeRate
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Roboto'
+    Font.Style = []
+    ParentFont = False
   end
   object Label8: TLabel
     Left = 560
     Top = 173
-    Width = 80
-    Height = 15
+    Width = 83
+    Height = 14
     Caption = 'USD Equivalent'
     FocusControl = edUSDEquivalent
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Roboto'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label9: TLabel
+    Left = 593
+    Top = 92
+    Width = 92
+    Height = 14
+    Caption = 'Booking Balance'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Roboto'
+    Font.Style = []
+    ParentFont = False
   end
   object edPaymentNum: TDBEdit
     Left = 8
@@ -158,6 +183,7 @@ object frmPayments: TfrmPayments
     Font.Style = []
     ParentFont = False
     TabOrder = 6
+    OnKeyUp = edAmountKeyUp
   end
   object DBNavigator1: TDBNavigator
     Left = 8
@@ -199,6 +225,7 @@ object frmPayments: TfrmPayments
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    OnChange = DateTimePicker1Change
   end
   object cmbType: TDBComboBox
     Left = 216
@@ -219,13 +246,13 @@ object frmPayments: TfrmPayments
       'Crypto')
     ParentFont = False
     TabOrder = 3
+    OnChange = cmbTypeChange
   end
   object cmbCurrency: TDBComboBox
     Left = 8
     Top = 194
     Width = 181
     Height = 27
-    Style = csDropDownList
     DataField = 'currency'
     DataSource = DataSource1
     Font.Charset = DEFAULT_CHARSET
@@ -236,7 +263,7 @@ object frmPayments: TfrmPayments
     ParentFont = False
     TabOrder = 5
   end
-  object dbExchangeRate: TDBEdit
+  object edExchangeRate: TDBEdit
     Left = 380
     Top = 194
     Width = 154
@@ -250,6 +277,7 @@ object frmPayments: TfrmPayments
     Font.Style = []
     ParentFont = False
     TabOrder = 7
+    OnKeyUp = edExchangeRateKeyUp
   end
   object edUSDEquivalent: TDBEdit
     Left = 560
@@ -264,9 +292,26 @@ object frmPayments: TfrmPayments
     Font.Name = 'Roboto'
     Font.Style = []
     ParentFont = False
+    ReadOnly = True
     TabOrder = 8
   end
+  object edBookingBalance: TEdit
+    Left = 593
+    Top = 112
+    Width = 121
+    Height = 27
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Roboto'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 10
+  end
   object tbPayments: TFDTable
+    AfterInsert = tbPaymentsAfterInsert
+    AfterPost = tbPaymentsAfterPost
+    AfterScroll = tbPaymentsAfterScroll
     IndexFieldNames = 'payment_id'
     Connection = dm.con
     ResourceOptions.AssignedValues = [rvEscapeExpand]
@@ -334,11 +379,11 @@ object frmPayments: TfrmPayments
     ResourceOptions.AssignedValues = [rvEscapeExpand]
     TableName = 'bookings'
     Left = 576
-    Top = 104
+    Top = 40
   end
   object DataSource2: TDataSource
     DataSet = tbBooking
     Left = 640
-    Top = 104
+    Top = 40
   end
 end

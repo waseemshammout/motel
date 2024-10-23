@@ -42,13 +42,23 @@ type
     tbPaymentsexchange_rate: TFloatField;
     tbPaymentsusd_equivalent: TFloatField;
     Label4: TLabel;
-    dbExchangeRate: TDBEdit;
+    edExchangeRate: TDBEdit;
     Label8: TLabel;
     edUSDEquivalent: TDBEdit;
+    edBookingBalance: TEdit;
+    Label9: TLabel;
+    dsBookingBalance: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure UpdateCurrencyList();
     procedure cmbTypeChange(Sender: TObject);
     procedure tbPaymentsAfterScroll(DataSet: TDataSet);
+    procedure DateTimePicker1Change(Sender: TObject);
+    procedure edAmountKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edExchangeRateKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure tbPaymentsAfterInsert(DataSet: TDataSet);
+    procedure tbPaymentsAfterPost(DataSet: TDataSet);
+    procedure UpdateBookingBalance();
   private
     { Private declarations }
   public
@@ -78,23 +88,91 @@ begin
     cmbCurrency.Items.AddStrings(cash_ccy);
 end;
 
+procedure TfrmPayments.UpdateBookingBalance();
+begin
+    with dsBookingBalance do
+  begin
+    Close;
+    ParamByName('BookingID').Value := cmbBooking.KeyValue;
+    Open;
+    edBookingBalance.Text := FieldByName('balance').Value;
+  end;
+end;
+
 procedure TfrmPayments.cmbTypeChange(Sender: TObject);
 begin
- UpdateCurrencyList();
+  UpdateCurrencyList();
+end;
+
+procedure TfrmPayments.DateTimePicker1Change(Sender: TObject);
+begin
+  tbPayments.Edit;
+  tbPayments.FieldByName('payment_date').Value := DateTimePicker1.Date;
+end;
+
+procedure TfrmPayments.edExchangeRateKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  try
+    with tbPayments do
+    begin
+      Edit;
+      FieldByName('usd_equivalent').Value := StrToFloat(edAmount.Text) *
+        StrToFloat(edExchangeRate.Text);
+    end;
+  except
+    on EConvertError do;
+    on EDatabaseError do;
+  end;
+end;
+
+procedure TfrmPayments.edAmountKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  try
+    with tbPayments do
+    begin
+      Edit;
+      FieldByName('usd_equivalent').Value := StrToFloat(edAmount.Text) *
+        StrToFloat(edExchangeRate.Text);
+    end;
+  except
+    on EConvertError do;
+    on EDatabaseError do;
+  end;
 end;
 
 procedure TfrmPayments.FormCreate(Sender: TObject);
 begin
   tbPayments.Open;
+
+end;
+
+procedure TfrmPayments.tbPaymentsAfterInsert(DataSet: TDataSet);
+begin
+  DateTimePicker1.Date := Date;
+  tbPayments.FieldByName('payment_date').Value := DateTimePicker1.Date;
+end;
+
+procedure TfrmPayments.tbPaymentsAfterPost(DataSet: TDataSet);
+begin
+ tbPayments.Refresh;
 end;
 
 procedure TfrmPayments.tbPaymentsAfterScroll(DataSet: TDataSet);
 begin
- UpdateCurrencyList();
- if not VarIsNull(edPaymentDate.Text) then
-  DateTimePicker1.Date := StrToDate(edPaymentDate.Text)
- else
-
+  try
+    begin
+      UpdateCurrencyList();
+      if not VarIsNull(edPaymentDate.Text) or (edPaymentDate.Text = '') then
+        DateTimePicker1.Date := StrToDate(edPaymentDate.Text)
+      else
+        DateTimePicker1.Date := Date;
+    end;
+  except
+    on EConvertError do
+      DateTimePicker1.Date := Date;
+  end;
 end;
 
 end.

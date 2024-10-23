@@ -102,8 +102,8 @@ begin
         edBookingBalance.Text := FieldByName('balance').Value;
       end;
   except
-    on EVariantTypeCastError do;
-    on e: exception do ShowMessage(e.ClassName);
+    on e: exception do
+      ShowMessage(e.Message);
   end;
 end;
 

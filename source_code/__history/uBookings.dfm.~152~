@@ -2,8 +2,8 @@ object frmBookings: TfrmBookings
   Left = 0
   Top = 0
   Caption = 'Bookings'
-  ClientHeight = 531
-  ClientWidth = 1151
+  ClientHeight = 527
+  ClientWidth = 1149
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -47,22 +47,20 @@ object frmBookings: TfrmBookings
   end
   object DBNavigator1: TDBNavigator
     Left = 0
-    Top = 506
-    Width = 1151
+    Top = 502
+    Width = 1149
     Height = 25
     DataSource = DataSource1
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbEdit, nbPost, nbCancel, nbRefresh]
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 502
-    ExplicitWidth = 906
   end
   object PageControl1: TPageControl
     Left = 21
     Top = 95
     Width = 1020
     Height = 329
-    ActivePage = TabSheet4
+    ActivePage = TabSheet1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
@@ -304,6 +302,7 @@ object frmBookings: TfrmBookings
         Top = 204
         Width = 154
         Height = 27
+        CustomHint = BalloonHint1
         DataField = 'rate_per_night'
         DataSource = DataSource1
         Font.Charset = DEFAULT_CHARSET
@@ -374,17 +373,18 @@ object frmBookings: TfrmBookings
         Height = 237
         ColCount = 11
         FixedCols = 0
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing, goColMoving, goRowSelect, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goFixedRowDefAlign]
         TabOrder = 2
       end
-      object Button3: TButton
+      object btnPopulate: TButton
         Left = 379
-        Top = 11
+        Top = 3
         Width = 75
         Height = 25
         Caption = 'Populate'
         TabOrder = 3
-        OnClick = Button3Click
+        Visible = False
+        OnClick = btnPopulateClick
       end
     end
     object TabSheet3: TTabSheet
@@ -563,7 +563,7 @@ object frmBookings: TfrmBookings
     Width = 90
     Height = 25
     Caption = 'Check In'
-    ImageIndex = 1
+    ImageIndex = 2
     Images = ImageList1
     TabOrder = 4
     OnClick = btnCheckInClick
@@ -574,7 +574,7 @@ object frmBookings: TfrmBookings
     Width = 90
     Height = 25
     Caption = 'Check Out'
-    ImageIndex = 2
+    ImageIndex = 3
     Images = ImageList1
     TabOrder = 5
     OnClick = btnCheckOutClick
@@ -585,7 +585,7 @@ object frmBookings: TfrmBookings
     Width = 90
     Height = 25
     Caption = 'Cancel'
-    ImageIndex = 3
+    ImageIndex = 4
     Images = ImageList1
     TabOrder = 6
     OnClick = btnCancelClick

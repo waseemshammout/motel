@@ -92,24 +92,18 @@ end;
 
 procedure TfrmPayments.UpdateBookingBalance();
 begin
-  try
-    if tbBooking.State <> dsInsert then
-      with dsBookingBalance do
-      begin
-        Close;
-        ParamByName('BookingID').Value := cmbBooking.KeyValue;
-        Open;
-        edBookingBalance.Text := FieldByName('balance').Value;
-      end;
-  except
-    on EVariantTypeCastError do;
-    on e: exception do ShowMessage(e.ClassName);
+    with dsBookingBalance do
+  begin
+    Close;
+    ParamByName('BookingID').Value := cmbBooking.KeyValue;
+    Open;
+    edBookingBalance.Text := FieldByName('balance').Value;
   end;
 end;
 
 procedure TfrmPayments.cmbBookingClick(Sender: TObject);
 begin
-  UpdateBookingBalance();
+ UpdateBookingBalance();
 end;
 
 procedure TfrmPayments.cmbTypeChange(Sender: TObject);
@@ -169,7 +163,7 @@ end;
 
 procedure TfrmPayments.tbPaymentsAfterPost(DataSet: TDataSet);
 begin
-  tbPayments.Refresh;
+ tbPayments.Refresh;
 end;
 
 procedure TfrmPayments.tbPaymentsAfterScroll(DataSet: TDataSet);
