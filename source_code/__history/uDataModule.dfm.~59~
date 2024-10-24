@@ -3,7 +3,7 @@ object dm: Tdm
   Width = 640
   object con: TFDConnection
     Params.Strings = (
-      'Database=C:\Users\Waseem\Desktop\bates\db\db.sdb'
+      'Database=C:\Users\wsham\OneDrive\Desktop\motel\db\db.sdb'
       'LockingMode=Normal'
       'DriverID=SQLite')
     LoginPrompt = False
@@ -75,9 +75,13 @@ object dm: Tdm
       '    total_amount real,'
       
         '    status varchar(100) default '#39'Pending'#39' check (status in ('#39'Pen' +
-        'ding'#39','#39'Confirmed'#39','#39'Checked-In'#39','#39'Checked-Out'#39','#39'Canceled'#39') ),'
+        'ding'#39','#39'Confirmed'#39','#39'CheckedIn'#39','#39'CheckedOut'#39','#39'Canceled'#39') ),'
       '    settled_amount real default 0,'
-      '    created_at timestamp default CURRENT_TIMESTAMP'
+      '    created_at timestamp default CURRENT_TIMESTAMP,'
+      '    confirmed_at timestamp,'
+      '    checkedin_at timestamp,'
+      '    checkedout_at timestamp,'
+      '    canceled_at timestamp'
       ');'
       ''
       'create table booking_guests_details'
@@ -97,7 +101,9 @@ object dm: Tdm
       
         '    payment_type varchar(100) check (payment_type in ('#39'Cash'#39', '#39'C' +
         'redit Card'#39', '#39'Crypto'#39')),'
-      '    amount real,'
+      '    amount real not null,'
+      '    exchange_rate real not null,'
+      '    usd_equivalent real not null,'
       
         '    currency varchar(10) check (currency in ('#39'USD'#39', '#39'EUR'#39', '#39'GBP'#39 +
         ', '#39'BTC'#39', '#39'ETH'#39', '#39'USDC'#39', '#39'USDT'#39')),'
@@ -125,6 +131,24 @@ object dm: Tdm
         '))'
       '    WHERE booking_id = NEW.booking_id;'
       'END;'
+      ''
+      ''
+      ''
+      'CREATE TRIGGER populate_payment_number'
+      'AFTER INSERT ON payments'
+      'FOR EACH ROW'
+      'BEGIN'
+      '    UPDATE payments'
+      
+        '    SET payment_num = '#39'PM-'#39' || strftime('#39'%Y%m'#39', NEW.created_at) ' +
+        '|| '#39'-'#39' ||'
+      
+        '                         (SELECT COUNT(*) + 1 FROM payments WHER' +
+        'E strftime('#39'%Y%m'#39', created_at) = strftime('#39'%Y%m'#39', NEW.created_at' +
+        '))'
+      '    WHERE payment_id = NEW.payment_id;'
+      'END;'
+      ''
       ''
       ''
       '/*'
@@ -220,11 +244,13 @@ object dm: Tdm
       ''
       ''
       'INSERT INTO payments'
-      #9'(payment_date, payment_type, amount, currency, booking_id)'
+      
+        #9'(payment_date, payment_type, amount, exchange_rate, usd_equival' +
+        'ent, currency, booking_id)'
       #9'VALUES'
-      #9'('#39'2024-01-15'#39', '#39'Cash'#39', 55, '#39'USD'#39', 1),'
-      #9'('#39'2024-02-10'#39', '#39'Crypto'#39', 146.22, '#39'USDT'#39', 2),'
-      #9'('#39'2024-06-22'#39', '#39'Credit Card'#39', 89.99, '#39'USD'#39', 3)'
+      #9'('#39'2024-01-15'#39', '#39'Cash'#39', 55, 1, 55, '#39'USD'#39', 1),'
+      #9'('#39'2024-02-10'#39', '#39'Crypto'#39', 146.22, 1, 146.22 , '#39'USDT'#39', 2),'
+      #9'('#39'2024-06-22'#39', '#39'Credit Card'#39', 89.99,1, 89.99, '#39'USD'#39', 3)'
       #9';')
     Left = 32
     Top = 80

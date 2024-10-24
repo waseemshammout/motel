@@ -82,6 +82,8 @@ type
     btnPopulate: TButton;
     dsBookingGuests: TFDQuery;
     cmd: TFDCommand;
+    sgPayments: TStringGrid;
+    tbPayments: TFDTable;
     procedure DTPCheckInChange(Sender: TObject);
     procedure DTPCheckOutChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -182,10 +184,6 @@ begin
     PageControl1.ActivePageIndex := 0;
   except
     on EConvertError do
-    begin
-
-    end;
-
   end;
 end;
 

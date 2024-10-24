@@ -6,6 +6,7 @@ object dm: Tdm
       'Database=C:\Users\wsham\OneDrive\Desktop\motel\db\db.sdb'
       'LockingMode=Normal'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 16
@@ -132,8 +133,6 @@ object dm: Tdm
       '    WHERE booking_id = NEW.booking_id;'
       'END;'
       ''
-      ''
-      ''
       'CREATE TRIGGER populate_payment_number'
       'AFTER INSERT ON payments'
       'FOR EACH ROW'
@@ -147,7 +146,27 @@ object dm: Tdm
         'E strftime('#39'%Y%m'#39', created_at) = strftime('#39'%Y%m'#39', NEW.created_at' +
         '))'
       '    WHERE payment_id = NEW.payment_id;'
+      ''
+      '    UPDATE bookings'
+      
+        '    SET settled_amount = (SELECT sum(usd_equivalent) FROM paymen' +
+        'ts WHERE booking_id = NEW.booking_id)'
+      '    WHERE booking_id = NEW.booking_id;'
+      ''
       'END;'
+      ''
+      '/*'
+      'CREATE TRIGGER update_booking_settlement'
+      'AFTER INSERT ON payments'
+      'FOR EACH ROW'
+      'BEGIN'
+      '    UPDATE bookings'
+      
+        '    SET settled_amount = (SELECT sum(usd_equivalent) FROM paymen' +
+        'ts WHERE booking_id = NEW.booking_id)'
+      '    WHERE booking_id = NEW.booking_id;'
+      'END;'
+      '*/'
       ''
       ''
       ''

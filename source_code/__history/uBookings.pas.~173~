@@ -19,8 +19,6 @@ type
     edBookingNum: TDBEdit;
     DataSource2: TDataSource;
     DBNavigator1: TDBNavigator;
-    Button1: TButton;
-    Button2: TButton;
     dsRooms: TFDQuery;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
@@ -81,9 +79,10 @@ type
     btnAdd: TButton;
     btnDelete: TButton;
     sgGuests: TStringGrid;
-    Button3: TButton;
+    btnPopulate: TButton;
     dsBookingGuests: TFDQuery;
     cmd: TFDCommand;
+    StringGrid1: TStringGrid;
     procedure DTPCheckInChange(Sender: TObject);
     procedure DTPCheckOutChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -97,7 +96,7 @@ type
     procedure SyncBookingStatus();
     procedure tbBookingsAfterScroll(DataSet: TDataSet);
     procedure btnSaveClick(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
+    procedure btnPopulateClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
   private
@@ -184,10 +183,6 @@ begin
     PageControl1.ActivePageIndex := 0;
   except
     on EConvertError do
-    begin
-
-    end;
-
   end;
 end;
 
@@ -216,14 +211,14 @@ procedure TfrmBookings.btnDeleteClick(Sender: TObject);
 begin
   if (sgGuests.Cells[0, sgGuests.Row] = '') or (sgGuests.Row = 0) then
     exit;
-  if MessageDlg('Are you sure?', TMsgDlgType.mtConfirmation, mbYesNo, 0) = mrYes
-  then
+  if MessageDlg('Are you sure you want to delete the selected guest?',
+    TMsgDlgType.mtConfirmation, mbYesNo, 0) = mrYes then
     with cmd do
     begin
       CommandText.Text := 'Delete from booking_guests_details where id = ' +
         sgGuests.Cells[0, sgGuests.Row];
       Execute();
-      Button3Click(Self);
+      btnPopulateClick(Self);
     end;
 end;
 
@@ -238,27 +233,28 @@ begin
   end;
 end;
 
-procedure TfrmBookings.Button3Click(Sender: TObject);
+procedure TfrmBookings.btnPopulateClick(Sender: TObject);
 var
   arr_cols_labels: TArray<string>;
   arr_cols_names: TArray<string>;
   arr_cols_sizes: TArray<integer>;
   c, r: integer;
 begin
-  // fill column names
+  // fill column names, adjust column sizes and fill columns data
   arr_cols_labels := ['ID', 'Guest ID', 'First Name', 'Last Name', 'Phone',
     'Email', 'Date of Birth', 'Birth Country', 'ID No.', 'ID Type', 'Guardian'];
   arr_cols_sizes := [20, 50, 100, 100, 150, 200, 150, 100, 100, 150, 50];
   arr_cols_names := ['id', 'guest_id', 'first_name', 'last_name', 'phone',
     'email', 'date_of_birth', 'birth_country', 'id_number', 'id_type',
     'guardian_id'];
+
   for c in [0 .. 10] do
   begin
     sgGuests.Cols[c].Text := arr_cols_labels[c];
     sgGuests.ColWidths[c] := arr_cols_sizes[c];
   end;
-  // loop through guest_details dataset and populate it
-  r := 1; // start from second row as the first is reserved for column headers
+
+  r := 1; // start from the second row as the first is reserved for column headers
   with dsBookingGuests do
   begin
     Close;
@@ -398,7 +394,7 @@ end;
 
 procedure TfrmBookings.PageControl1Change(Sender: TObject);
 begin
-  Button3Click(Self);
+  btnPopulateClick(Self);
 end;
 
 end.

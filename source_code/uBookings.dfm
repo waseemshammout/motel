@@ -62,7 +62,7 @@ object frmBookings: TfrmBookings
     Top = 95
     Width = 1020
     Height = 329
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
@@ -392,6 +392,15 @@ object frmBookings: TfrmBookings
     object TabSheet3: TTabSheet
       Caption = 'Payments'
       ImageIndex = 2
+      object sgPayments: TStringGrid
+        Left = 3
+        Top = 56
+        Width = 899
+        Height = 214
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goFixedRowDefAlign]
+        TabOrder = 0
+      end
     end
     object TabSheet2: TTabSheet
       Caption = 'Logging'
@@ -603,14 +612,23 @@ object frmBookings: TfrmBookings
     TabOrder = 7
     OnClick = btnSaveClick
   end
+  object Button1: TButton
+    Left = 424
+    Top = 46
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 8
+    OnClick = Button1Click
+  end
   object tbBookings: TFDTable
     AfterScroll = tbBookingsAfterScroll
     IndexFieldNames = 'booking_id'
     Connection = dm.con
     ResourceOptions.AssignedValues = [rvEscapeExpand]
     TableName = 'bookings'
-    Left = 824
-    Top = 64
+    Left = 256
+    Top = 8
     object tbBookingsbooking_id: TFDAutoIncField
       FieldName = 'booking_id'
       Origin = 'booking_id'
@@ -678,24 +696,24 @@ object frmBookings: TfrmBookings
   end
   object DataSource1: TDataSource
     DataSet = tbBookings
-    Left = 856
-    Top = 64
+    Left = 336
+    Top = 8
   end
   object DataSource2: TDataSource
     DataSet = dsRooms
-    Left = 856
+    Left = 1088
     Top = 8
   end
   object dsRooms: TFDQuery
     Connection = dm.con
     SQL.Strings = (
       'select * from rooms where room_status = '#39'Vacant'#39)
-    Left = 824
+    Left = 1056
     Top = 8
   end
   object dsRoom: TFDQuery
     Connection = dm.con
-    Left = 856
+    Left = 1088
     Top = 120
   end
   object ImageList1: TImageList
@@ -976,8 +994,8 @@ object frmBookings: TfrmBookings
   object BalloonHint1: TBalloonHint
     Style = bhsStandard
     Delay = 100
-    Left = 544
-    Top = 32
+    Left = 600
+    Top = 24
   end
   object dsBookingGuests: TFDQuery
     Connection = dm.con
@@ -990,8 +1008,8 @@ object frmBookings: TfrmBookings
       'join bookings b on bgd.booking_id = b.booking_id'
       'join guests g on bgd.guest_id = g.guest_id'
       'where b.booking_id = :pBookingID')
-    Left = 513
-    Top = 324
+    Left = 681
+    Top = 436
     ParamData = <
       item
         Name = 'PBOOKINGID'
@@ -1001,7 +1019,13 @@ object frmBookings: TfrmBookings
   object cmd: TFDCommand
     Connection = dm.con
     CommandKind = skOther
-    Left = 616
-    Top = 328
+    Left = 744
+    Top = 432
+  end
+  object tbPayments: TFDTable
+    Connection = dm.con
+    TableName = 'payments'
+    Left = 1088
+    Top = 224
   end
 end

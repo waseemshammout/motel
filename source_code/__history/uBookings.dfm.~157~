@@ -2,8 +2,8 @@ object frmBookings: TfrmBookings
   Left = 0
   Top = 0
   Caption = 'Bookings'
-  ClientHeight = 531
-  ClientWidth = 1151
+  ClientHeight = 527
+  ClientWidth = 1149
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -47,22 +47,22 @@ object frmBookings: TfrmBookings
   end
   object DBNavigator1: TDBNavigator
     Left = 0
-    Top = 506
-    Width = 1151
+    Top = 502
+    Width = 1149
     Height = 25
     DataSource = DataSource1
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbEdit, nbPost, nbCancel, nbRefresh]
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 502
-    ExplicitWidth = 1149
+    ExplicitTop = 498
+    ExplicitWidth = 1147
   end
   object PageControl1: TPageControl
     Left = 21
     Top = 95
     Width = 1020
     Height = 329
-    ActivePage = TabSheet1
+    ActivePage = TabSheet4
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
@@ -392,6 +392,16 @@ object frmBookings: TfrmBookings
     object TabSheet3: TTabSheet
       Caption = 'Payments'
       ImageIndex = 2
+      object StringGrid1: TStringGrid
+        Left = 3
+        Top = 56
+        Width = 899
+        Height = 214
+        ColCount = 11
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goFixedRowDefAlign]
+        TabOrder = 0
+      end
     end
     object TabSheet2: TTabSheet
       Caption = 'Logging'
@@ -990,8 +1000,8 @@ object frmBookings: TfrmBookings
       'join bookings b on bgd.booking_id = b.booking_id'
       'join guests g on bgd.guest_id = g.guest_id'
       'where b.booking_id = :pBookingID')
-    Left = 513
-    Top = 324
+    Left = 681
+    Top = 436
     ParamData = <
       item
         Name = 'PBOOKINGID'
@@ -1001,7 +1011,7 @@ object frmBookings: TfrmBookings
   object cmd: TFDCommand
     Connection = dm.con
     CommandKind = skOther
-    Left = 616
-    Top = 328
+    Left = 744
+    Top = 432
   end
 end
