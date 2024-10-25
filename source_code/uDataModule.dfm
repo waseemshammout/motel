@@ -107,7 +107,7 @@ object dm: Tdm
       '    usd_equivalent real not null,'
       
         '    currency varchar(10) check (currency in ('#39'USD'#39', '#39'EUR'#39', '#39'GBP'#39 +
-        ', '#39'BTC'#39', '#39'ETH'#39', '#39'USDC'#39', '#39'USDT'#39')),'
+        ', '#39'BTC'#39', '#39'ETH'#39', '#39'USDC'#39', '#39'USDT'#39', '#39'SOL'#39')),'
       
         '    booking_id integer not null references bookings (booking_id)' +
         ','
@@ -125,11 +125,8 @@ object dm: Tdm
       '    UPDATE bookings'
       
         '    SET booking_num = '#39'BM-'#39' || strftime('#39'%Y%m'#39', NEW.created_at) ' +
-        '|| '#39'-'#39' ||'
-      
-        '                         (SELECT COUNT(*) + 1 FROM bookings WHER' +
-        'E strftime('#39'%Y%m'#39', created_at) = strftime('#39'%Y%m'#39', NEW.created_at' +
-        '))'
+        '|| '#39'-'#39' || (SELECT COUNT(*) + 1 FROM bookings WHERE strftime('#39'%Y%' +
+        'm'#39', created_at) = strftime('#39'%Y%m'#39', NEW.created_at))'
       '    WHERE booking_id = NEW.booking_id;'
       'END;'
       ''
@@ -140,11 +137,8 @@ object dm: Tdm
       '    UPDATE payments'
       
         '    SET payment_num = '#39'PM-'#39' || strftime('#39'%Y%m'#39', NEW.created_at) ' +
-        '|| '#39'-'#39' ||'
-      
-        '                         (SELECT COUNT(*) + 1 FROM payments WHER' +
-        'E strftime('#39'%Y%m'#39', created_at) = strftime('#39'%Y%m'#39', NEW.created_at' +
-        '))'
+        '|| '#39'-'#39' || (SELECT COUNT(*) + 1 FROM payments WHERE strftime('#39'%Y%' +
+        'm'#39', created_at) = strftime('#39'%Y%m'#39', NEW.created_at))'
       '    WHERE payment_id = NEW.payment_id;'
       ''
       '    UPDATE bookings'
@@ -152,7 +146,6 @@ object dm: Tdm
         '    SET settled_amount = (SELECT sum(usd_equivalent) FROM paymen' +
         'ts WHERE booking_id = NEW.booking_id)'
       '    WHERE booking_id = NEW.booking_id;'
-      ''
       'END;'
       ''
       '/*'
@@ -236,16 +229,16 @@ object dm: Tdm
       ''
       
         'INSERT INTO bookings(checkin_date, checkout_date, room_id, rate_' +
-        'per_night)'
-      'VALUES  ('#39'2024-01-15'#39', '#39'2024-01-17'#39', 1, 54.25 );'
+        'per_night, nights, total_amount)'
+      'VALUES  ('#39'2024-01-15'#39', '#39'2024-01-17'#39', 1, 54.25 , 2, 108.5);'
       
         'INSERT INTO bookings(checkin_date, checkout_date, room_id, rate_' +
-        'per_night)'
-      'VALUES  ('#39'2024-02-10'#39', '#39'2024-02-13'#39', 5, 144.99);'
+        'per_night, nights, total_amount)'
+      'VALUES  ('#39'2024-02-10'#39', '#39'2024-02-13'#39', 5, 144.99, 3, 434.97);'
       
         'INSERT INTO bookings(checkin_date, checkout_date, room_id, rate_' +
-        'per_night)'
-      'VALUES  ('#39'2024-06-22'#39', '#39'2024-06-30'#39', 3, 89.99);'
+        'per_night, nights, total_amount)'
+      'VALUES  ('#39'2024-06-22'#39', '#39'2024-06-30'#39', 3, 89.99, 8, 719.92);'
       ''
       ''
       
@@ -269,7 +262,7 @@ object dm: Tdm
       #9'VALUES'
       #9'('#39'2024-01-15'#39', '#39'Cash'#39', 55, 1, 55, '#39'USD'#39', 1),'
       #9'('#39'2024-02-10'#39', '#39'Crypto'#39', 146.22, 1, 146.22 , '#39'USDT'#39', 2),'
-      #9'('#39'2024-06-22'#39', '#39'Credit Card'#39', 89.99,1, 89.99, '#39'USD'#39', 3)'
+      #9'('#39'2024-06-22'#39', '#39'Credit Card'#39', 89.99, 1, 89.99, '#39'USD'#39', 3)'
       #9';')
     Left = 32
     Top = 80

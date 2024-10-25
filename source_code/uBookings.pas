@@ -432,6 +432,7 @@ end;
 procedure TfrmBookings.PageControl1Change(Sender: TObject);
 begin
   btnPopulateClick(Self);
+  Button1Click(Self);
 end;
 
 end.
