@@ -102,6 +102,7 @@ type
     procedure btnDeleteClick(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FillNavButtonsCaptions();
   private
     { Private declarations }
   public
@@ -116,6 +117,35 @@ implementation
 {$R *.dfm}
 
 uses uDataModule, uMain, uRooms;
+
+procedure TfrmBookings.FillNavButtonsCaptions();
+var
+ c: integer;
+begin
+  with DBNavigator1 do
+  begin
+    for c := 0 to ControlCount -1 do
+      if Controls[c].ClassName = 'TNavButton' then
+      with TNavButton(Controls[c]) do
+        begin
+          Glyph := nil;
+          Font.Style := [fsBold];
+          case TNavigateBtn(c) of
+            nbInsert : Caption := '              Add';
+            nbDelete : Caption := '              Delete';
+            nbPost   : Caption := '                Save';
+            nbEdit : Caption := '              Edit';
+            nbCancel : Caption := '                   Cancel';
+            nbFirst : Caption := '               First';
+            nbLast : Caption := '               Last';
+            nbNext : Caption := '                Next';
+            nbPrior : Caption := '                    Previous';
+            nbRefresh : Caption := '                    Refresh';
+          end;
+        end;
+  end;
+end;
+
 
 procedure TfrmBookings.SyncBookingStatus();
 var
@@ -427,6 +457,7 @@ begin
   tbBookings.Open;
   dsRooms.Open;
   PageControl1.ActivePageIndex := 0;
+  FillNavButtonsCaptions();
 end;
 
 procedure TfrmBookings.PageControl1Change(Sender: TObject);

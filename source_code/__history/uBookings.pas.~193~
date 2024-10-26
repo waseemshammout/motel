@@ -117,6 +117,9 @@ implementation
 
 uses uDataModule, uMain, uRooms;
 
+
+
+
 procedure TfrmBookings.SyncBookingStatus();
 var
   NewStatus: string;
@@ -241,22 +244,22 @@ var
   arr_cols_labels: TArray<string>;
   arr_cols_names: TArray<string>;
   arr_cols_sizes: TArray<integer>;
-  c, r : integer;
+  c, r: integer;
 begin
   arr_cols_labels := ['ID', 'Payment No', 'Date', 'Method', 'Amount (USD)'];
   arr_cols_sizes := [25, 150, 100, 300, 300];
-  arr_cols_names := ['payment_id','payment_num','payment_date','payment_type','usd_equivalent'];
+  arr_cols_names := ['payment_id', 'payment_num', 'payment_date', 'payment_type', 'usd_equivalent'];
 
   for c in [0 .. 4] do
   begin
     sgPayments.Cols[c].Text := arr_cols_labels[c];
     sgPayments.ColWidths[c] := arr_cols_sizes[c];
   end;
-
+  r := 1;
   with tbPayments do
   begin
     Close;
-    Filter := 'booking_id = ' + tbBookings.FieldByName('booking_id').Value;
+    Filter := 'booking_id = ' + tbBookings.FieldByName('booking_id').AsString;
     Filtered := True;
     Open;
     while not eof do
@@ -264,6 +267,8 @@ begin
       for c in [0 .. 4] do
         if Not VarIsNull(FieldByName(arr_cols_names[c]).Value) then
           sgPayments.Cells[c, r] := FieldByName(arr_cols_names[c]).Value;
+      Next;
+      inc(r);
     end;
   end;
 end;
@@ -425,11 +430,13 @@ begin
   tbBookings.Open;
   dsRooms.Open;
   PageControl1.ActivePageIndex := 0;
+  frmMain.FillNavButtonsCaptions();
 end;
 
 procedure TfrmBookings.PageControl1Change(Sender: TObject);
 begin
   btnPopulateClick(Self);
+  Button1Click(Self);
 end;
 
 end.

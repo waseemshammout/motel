@@ -27,7 +27,7 @@ type
     procedure btnBookingsClick(Sender: TObject);
     procedure btnExitClick(Sender: TObject);
     procedure btnPaymentsClick(Sender: TObject);
-
+    procedure FillNavButtonsCaptions();
   private
     { Private declarations }
   public
@@ -44,6 +44,33 @@ uses
 
 {$R *.dfm}
 
+procedure TfrmMain.FillNavButtonsCaptions();
+var
+ c: integer;
+begin
+  with DBNavigator1 do
+  begin
+    for c := 0 to ControlCount -1 do
+      if Controls[c].ClassName = 'TNavButton' then
+      with TNavButton(Controls[c]) do
+        begin
+          Glyph := nil;
+          Font.Style := [fsBold];
+          case TNavigateBtn(c) of
+            nbInsert : Caption := '              Add';
+            nbDelete : Caption := '              Delete';
+            nbPost   : Caption := '                Save';
+            nbEdit : Caption := '              Edit';
+            nbCancel : Caption := '                   Cancel';
+            nbFirst : Caption := '               First';
+            nbLast : Caption := '               Last';
+            nbNext : Caption := '                Next';
+            nbPrior : Caption := '                    Previous';
+            nbRefresh : Caption := '                    Refresh';
+          end;
+        end;
+  end;
+end;
 
 
 procedure TfrmMain.btnBookingsClick(Sender: TObject);

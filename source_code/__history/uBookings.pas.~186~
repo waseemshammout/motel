@@ -82,7 +82,9 @@ type
     btnPopulate: TButton;
     dsBookingGuests: TFDQuery;
     cmd: TFDCommand;
-    StringGrid1: TStringGrid;
+    sgPayments: TStringGrid;
+    tbPayments: TFDTable;
+    Button1: TButton;
     procedure DTPCheckInChange(Sender: TObject);
     procedure DTPCheckOutChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -99,6 +101,8 @@ type
     procedure btnPopulateClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FillNavButtonsCaptions();
   private
     { Private declarations }
   public
@@ -113,6 +117,30 @@ implementation
 {$R *.dfm}
 
 uses uDataModule, uMain, uRooms;
+
+procedure TfrmBookings.FillNavButtonsCaptions();
+var
+ c: integer;
+begin
+  with DBNavigator1 do
+  begin
+    for c := 0 to ControlCount -1 do
+      if Controls[c].ClassName = 'TNavButton' then
+      with TNavButton(Controls[c]) do
+        begin
+          Glyph := nil;
+          Font.Style := [fsBold];
+          case TNavigateBtn(c) of
+            nbInsert : Caption := '          Add';
+            nbDelete : Caption := '          Delete';
+            nbPost   : Caption := '          Save';
+            nbEdit : Caption := '          Edit';
+            nbCancel : Caption := '          Cancel';
+          end;
+        end;
+  end;
+end;
+
 
 procedure TfrmBookings.SyncBookingStatus();
 var
@@ -233,6 +261,40 @@ begin
   end;
 end;
 
+procedure TfrmBookings.Button1Click(Sender: TObject);
+var
+  arr_cols_labels: TArray<string>;
+  arr_cols_names: TArray<string>;
+  arr_cols_sizes: TArray<integer>;
+  c, r: integer;
+begin
+  arr_cols_labels := ['ID', 'Payment No', 'Date', 'Method', 'Amount (USD)'];
+  arr_cols_sizes := [25, 150, 100, 300, 300];
+  arr_cols_names := ['payment_id', 'payment_num', 'payment_date', 'payment_type', 'usd_equivalent'];
+
+  for c in [0 .. 4] do
+  begin
+    sgPayments.Cols[c].Text := arr_cols_labels[c];
+    sgPayments.ColWidths[c] := arr_cols_sizes[c];
+  end;
+  r := 1;
+  with tbPayments do
+  begin
+    Close;
+    Filter := 'booking_id = ' + tbBookings.FieldByName('booking_id').AsString;
+    Filtered := True;
+    Open;
+    while not eof do
+    begin
+      for c in [0 .. 4] do
+        if Not VarIsNull(FieldByName(arr_cols_names[c]).Value) then
+          sgPayments.Cells[c, r] := FieldByName(arr_cols_names[c]).Value;
+      Next;
+      inc(r);
+    end;
+  end;
+end;
+
 procedure TfrmBookings.btnPopulateClick(Sender: TObject);
 var
   arr_cols_labels: TArray<string>;
@@ -243,7 +305,7 @@ begin
   // fill column names, adjust column sizes and fill columns data
   arr_cols_labels := ['ID', 'Guest ID', 'First Name', 'Last Name', 'Phone',
     'Email', 'Date of Birth', 'Birth Country', 'ID No.', 'ID Type', 'Guardian'];
-  arr_cols_sizes := [20, 50, 100, 100, 150, 200, 150, 100, 100, 150, 50];
+  arr_cols_sizes := [25, 50, 100, 100, 150, 200, 150, 100, 100, 150, 50];
   arr_cols_names := ['id', 'guest_id', 'first_name', 'last_name', 'phone',
     'email', 'date_of_birth', 'birth_country', 'id_number', 'id_type',
     'guardian_id'];
@@ -390,11 +452,13 @@ begin
   tbBookings.Open;
   dsRooms.Open;
   PageControl1.ActivePageIndex := 0;
+  FillNavButtonsCaptions();
 end;
 
 procedure TfrmBookings.PageControl1Change(Sender: TObject);
 begin
   btnPopulateClick(Self);
+  Button1Click(Self);
 end;
 
 end.
