@@ -321,6 +321,8 @@ object frmPayments: TfrmPayments
   end
   object tbPayments: TFDTable
     AfterInsert = tbPaymentsAfterInsert
+    AfterEdit = tbPaymentsAfterEdit
+    BeforePost = tbPaymentsBeforePost
     AfterPost = tbPaymentsAfterPost
     AfterScroll = tbPaymentsAfterScroll
     IndexFieldNames = 'payment_id'
@@ -379,6 +381,7 @@ object frmPayments: TfrmPayments
     end
   end
   object DataSource1: TDataSource
+    AutoEdit = False
     DataSet = tbPayments
     Left = 128
     Top = 376

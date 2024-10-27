@@ -86,7 +86,6 @@ type
     sgPayments: TStringGrid;
     tbPayments: TFDTable;
     Button1: TButton;
-    Shape1: TShape;
     btnAddPayment: TButton;
     procedure DTPCheckInChange(Sender: TObject);
     procedure DTPCheckOutChange(Sender: TObject);
@@ -108,6 +107,7 @@ type
     procedure FillNavButtonsCaptions();
     procedure tbBookingsAfterEdit(DataSet: TDataSet);
     procedure btnAddPaymentClick(Sender: TObject);
+    procedure sgPaymentsDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -441,8 +441,7 @@ begin
       Close;
       SQL.Text := 'Select * From rooms where room_id=' + SelectedRoom.ToString;
       Open;
-      tbBookings.FieldByName('rate_per_night').Value :=
-        FieldByName('standard_rate_per_night').Value;
+      tbBookings.FieldByName('rate_per_night').Value := FieldByName('standard_rate_per_night').Value;
     end;
   except
     on e: EDatabaseError do
@@ -502,6 +501,15 @@ procedure TfrmBookings.PageControl1Change(Sender: TObject);
 begin
   btnPopulateClick(Self);
   Button1Click(Self);
+end;
+
+procedure TfrmBookings.sgPaymentsDblClick(Sender: TObject);
+begin
+  if (sgPayments.Cells[0, sgPayments.Row] = '') Or  (VarIsNull(sgPayments.Cells[0, sgPayments.Row])) then exit;
+  if not assigned(frmPayments) then frmPayments := TfrmPayments.Create(Self);
+  frmPayments.Show;
+  frmPayments.tbPayments.Filter := 'payment_id = ' + sgPayments.Cells [0, sgPayments.Row];
+  frmPayments.tbPayments.Filtered := True;
 end;
 
 end.

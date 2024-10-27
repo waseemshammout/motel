@@ -62,6 +62,8 @@ type
     procedure UpdateBookingBalance();
     procedure cmbBookingClick(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
+    procedure tbPaymentsAfterEdit(DataSet: TDataSet);
+    procedure tbPaymentsBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -169,6 +171,12 @@ begin
 //    raise Exception.Create('Error Message');
 end;
 
+procedure TfrmPayments.tbPaymentsAfterEdit(DataSet: TDataSet);
+begin
+ tbPayments.Cancel;
+ raise Exception.Create('Payment info can''t be edited, please contact the administrator!');
+end;
+
 procedure TfrmPayments.tbPaymentsAfterInsert(DataSet: TDataSet);
 begin
   DateTimePicker1.Date := Date;
@@ -195,6 +203,12 @@ begin
     on EConvertError do
       DateTimePicker1.Date := Date;
   end;
+end;
+
+procedure TfrmPayments.tbPaymentsBeforePost(DataSet: TDataSet);
+begin
+ if MessageDlg('Are you sure?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+   tbPayments.CheckBrowseMode;
 end;
 
 end.

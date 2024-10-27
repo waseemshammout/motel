@@ -62,7 +62,7 @@ object frmBookings: TfrmBookings
     Top = 95
     Width = 1020
     Height = 329
-    ActivePage = TabSheet1
+    ActivePage = TabSheet4
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
@@ -185,7 +185,7 @@ object frmBookings: TfrmBookings
       end
       object Shape1: TShape
         Left = 656
-        Top = 41
+        Top = 33
         Width = 321
         Height = 224
         Brush.Style = bsClear
@@ -374,6 +374,7 @@ object frmBookings: TfrmBookings
         ImageIndex = 1
         Images = ImageList1
         TabOrder = 11
+        Visible = False
         OnClick = btnSaveClick
       end
       object btnConfirm: TButton
@@ -473,6 +474,15 @@ object frmBookings: TfrmBookings
         FixedCols = 0
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goFixedRowDefAlign]
         TabOrder = 0
+      end
+      object btnAddPayment: TButton
+        Left = 3
+        Top = 25
+        Width = 75
+        Height = 25
+        Caption = 'Add'
+        TabOrder = 1
+        OnClick = btnAddPaymentClick
       end
     end
     object TabSheet2: TTabSheet

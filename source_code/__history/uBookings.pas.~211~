@@ -86,7 +86,7 @@ type
     sgPayments: TStringGrid;
     tbPayments: TFDTable;
     Button1: TButton;
-    Shape1: TShape;
+    btnAddPayment: TButton;
     procedure DTPCheckInChange(Sender: TObject);
     procedure DTPCheckOutChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -106,6 +106,8 @@ type
     procedure Button1Click(Sender: TObject);
     procedure FillNavButtonsCaptions();
     procedure tbBookingsAfterEdit(DataSet: TDataSet);
+    procedure btnAddPaymentClick(Sender: TObject);
+    procedure sgPaymentsDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -119,7 +121,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDataModule, uMain, uRooms;
+uses uDataModule, uMain, uRooms, uPayments;
 
 procedure TfrmBookings.FillNavButtonsCaptions();
 var
@@ -227,7 +229,8 @@ begin
   if (BookingStatus = 'CheckedOut') or (BookingStatus = 'Canceled') then
   begin
     tbBookings.Cancel;
-    raise Exception.Create('Can''t edit a booking with ' + BookingStatus + ' status!');
+    raise Exception.Create('Can''t edit a booking with ' + BookingStatus +
+      ' status!');
   end;
 end;
 
@@ -404,6 +407,16 @@ begin
   end;
 end;
 
+procedure TfrmBookings.btnAddPaymentClick(Sender: TObject);
+begin
+  if not assigned(frmPayments) then
+    frmPayments := TfrmPayments.Create(Self);
+  frmPayments.Show;
+  frmPayments.tbPayments.Insert;
+  frmPayments.tbPayments.FieldByName('booking_id').Value :=
+    tbBookings.FieldByName('booking_id').Value;
+end;
+
 procedure TfrmBookings.btnCancelClick(Sender: TObject);
 begin
   if MessageDlg('Are you sure?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
@@ -489,6 +502,16 @@ procedure TfrmBookings.PageControl1Change(Sender: TObject);
 begin
   btnPopulateClick(Self);
   Button1Click(Self);
+end;
+
+procedure TfrmBookings.sgPaymentsDblClick(Sender: TObject);
+begin
+ if (sgPayments.Cells[0, sgPayments.Row] = '') Or (varisnull(sgPayments.Cells[0, sgPayments.Row])) then
+
+ if not assigned(frmPayments) then frmPayments := TfrmPayments.Create(Self);
+ frmPayments.Show;
+ frmPayments.tbPayments.Filter := 'payment_id = ' + sgPayments.Cells[0, sgPayments.Row];
+ frmPayments.tbPayments.Filtered := True;
 end;
 
 end.

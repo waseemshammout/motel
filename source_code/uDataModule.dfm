@@ -6,6 +6,7 @@ object dm: Tdm
       'Database=C:\Users\Waseem\Desktop\motel\motel\db\db.sdb'
       'LockingMode=Normal'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 16
@@ -146,21 +147,6 @@ object dm: Tdm
         'ts WHERE booking_id = NEW.booking_id)'
       '    WHERE booking_id = NEW.booking_id;'
       'END;'
-      ''
-      '/*'
-      'CREATE TRIGGER update_booking_settlement'
-      'AFTER INSERT ON payments'
-      'FOR EACH ROW'
-      'BEGIN'
-      '    UPDATE bookings'
-      
-        '    SET settled_amount = (SELECT sum(usd_equivalent) FROM paymen' +
-        'ts WHERE booking_id = NEW.booking_id)'
-      '    WHERE booking_id = NEW.booking_id;'
-      'END;'
-      '*/'
-      ''
-      ''
       ''
       '/*'
       '  Dummy data'
