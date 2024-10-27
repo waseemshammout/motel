@@ -15,6 +15,7 @@ object frmPayments: TfrmPayments
   Visible = True
   WindowState = wsMaximized
   OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
   TextHeight = 15
   object Shape1: TShape
     Left = 40
@@ -202,9 +203,6 @@ object frmPayments: TfrmPayments
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbEdit, nbPost, nbCancel, nbRefresh]
     Align = alBottom
     TabOrder = 9
-    ExplicitLeft = 8
-    ExplicitTop = 307
-    ExplicitWidth = 490
   end
   object cmbBooking: TDBLookupComboBox
     Left = 436

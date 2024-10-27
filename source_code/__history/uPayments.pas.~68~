@@ -47,6 +47,8 @@ type
     edUSDEquivalent: TDBEdit;
     edBookingBalance: TEdit;
     Label9: TLabel;
+    dsBookingBalance: TFDQuery;
+    Shape1: TShape;
     procedure FormCreate(Sender: TObject);
     procedure UpdateCurrencyList();
     procedure cmbTypeChange(Sender: TObject);
@@ -57,6 +59,8 @@ type
       Shift: TShiftState);
     procedure tbPaymentsAfterInsert(DataSet: TDataSet);
     procedure tbPaymentsAfterPost(DataSet: TDataSet);
+    procedure UpdateBookingBalance();
+    procedure cmbBookingClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -84,6 +88,28 @@ begin
     cmbCurrency.Items.AddStrings(crypto_ccy)
   else
     cmbCurrency.Items.AddStrings(cash_ccy);
+end;
+
+procedure TfrmPayments.UpdateBookingBalance();
+begin
+  try
+    if tbBooking.State <> dsInsert then
+      with dsBookingBalance do
+      begin
+        Close;
+        ParamByName('BookingID').Value := cmbBooking.KeyValue;
+        Open;
+        edBookingBalance.Text := FieldByName('balance').Value;
+      end;
+  except
+    on EVariantTypeCastError do;
+    on e: exception do ShowMessage(e.ClassName);
+  end;
+end;
+
+procedure TfrmPayments.cmbBookingClick(Sender: TObject);
+begin
+  UpdateBookingBalance();
 end;
 
 procedure TfrmPayments.cmbTypeChange(Sender: TObject);
@@ -132,7 +158,7 @@ end;
 procedure TfrmPayments.FormCreate(Sender: TObject);
 begin
   tbPayments.Open;
-
+  UpdateBookingBalance();
 end;
 
 procedure TfrmPayments.tbPaymentsAfterInsert(DataSet: TDataSet);
@@ -143,7 +169,7 @@ end;
 
 procedure TfrmPayments.tbPaymentsAfterPost(DataSet: TDataSet);
 begin
- tbPayments.Refresh;
+  tbPayments.Refresh;
 end;
 
 procedure TfrmPayments.tbPaymentsAfterScroll(DataSet: TDataSet);
@@ -155,6 +181,7 @@ begin
         DateTimePicker1.Date := StrToDate(edPaymentDate.Text)
       else
         DateTimePicker1.Date := Date;
+      UpdateBookingBalance();
     end;
   except
     on EConvertError do

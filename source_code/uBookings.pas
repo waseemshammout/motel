@@ -229,7 +229,8 @@ begin
   if (BookingStatus = 'CheckedOut') or (BookingStatus = 'Canceled') then
   begin
     tbBookings.Cancel;
-    raise Exception.Create('Can''t edit a booking with ' + BookingStatus + ' status!');
+    raise Exception.Create('Can''t edit a booking with ' + BookingStatus +
+      ' status!');
   end;
 end;
 
@@ -408,10 +409,12 @@ end;
 
 procedure TfrmBookings.btnAddPaymentClick(Sender: TObject);
 begin
- if not assigned(frmPayments) then frmPayments := TfrmPayments.Create(Self);
- frmPayments.Show;
- frmPayments.tbPayments.Insert;
- frmPayments.tbPayments.FieldByName('booking_id').Value := tbBookings.FieldByName('booking_id').Value;
+  if not assigned(frmPayments) then
+    frmPayments := TfrmPayments.Create(Self);
+  frmPayments.Show;
+  frmPayments.tbPayments.Insert;
+  frmPayments.tbPayments.FieldByName('booking_id').Value :=
+    tbBookings.FieldByName('booking_id').Value;
 end;
 
 procedure TfrmBookings.btnCancelClick(Sender: TObject);

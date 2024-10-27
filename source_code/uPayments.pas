@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Mask,
-  Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.ComCtrls;
+  Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.ComCtrls, System.UITypes;
 
 type
   TfrmPayments = class(TForm)
@@ -61,6 +61,7 @@ type
     procedure tbPaymentsAfterPost(DataSet: TDataSet);
     procedure UpdateBookingBalance();
     procedure cmbBookingClick(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -159,6 +160,13 @@ procedure TfrmPayments.FormCreate(Sender: TObject);
 begin
   tbPayments.Open;
   UpdateBookingBalance();
+end;
+
+procedure TfrmPayments.FormDeactivate(Sender: TObject);
+begin
+//  if (tbPayments.State = dsEdit) or (tbPayments.State = dsInsert) then
+//   if MessageDlg('The input data will be lost, do you want to continue?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then tbPayments.Cancel;
+//    raise Exception.Create('Error Message');
 end;
 
 procedure TfrmPayments.tbPaymentsAfterInsert(DataSet: TDataSet);

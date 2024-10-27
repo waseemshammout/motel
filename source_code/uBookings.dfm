@@ -11,6 +11,7 @@ object frmBookings: TfrmBookings
   Font.Name = 'Roboto'
   Font.Style = []
   FormStyle = fsMDIChild
+  Visible = True
   WindowState = wsMaximized
   OnCreate = FormCreate
   TextHeight = 14

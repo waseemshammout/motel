@@ -9,7 +9,8 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.ComCtrls, Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls,
-  Vcl.Buttons, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids;
+  Vcl.Buttons, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids,
+  System.UITypes;
 
 type
   TfrmBookings = class(TForm)
@@ -85,6 +86,8 @@ type
     sgPayments: TStringGrid;
     tbPayments: TFDTable;
     Button1: TButton;
+    Shape1: TShape;
+    btnAddPayment: TButton;
     procedure DTPCheckInChange(Sender: TObject);
     procedure DTPCheckOutChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -102,6 +105,9 @@ type
     procedure btnDeleteClick(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FillNavButtonsCaptions();
+    procedure tbBookingsAfterEdit(DataSet: TDataSet);
+    procedure btnAddPaymentClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -115,10 +121,45 @@ implementation
 
 {$R *.dfm}
 
-uses uDataModule, uMain, uRooms;
+uses uDataModule, uMain, uRooms, uPayments;
 
-
-
+procedure TfrmBookings.FillNavButtonsCaptions();
+var
+  c: integer;
+begin
+  with DBNavigator1 do
+  begin
+    for c := 0 to ControlCount - 1 do
+      if Controls[c].ClassName = 'TNavButton' then
+        with TNavButton(Controls[c]) do
+        begin
+          Glyph := nil;
+          Font.Style := [fsBold];
+          case TNavigateBtn(c) of
+            nbInsert:
+              Caption := '              Add';
+            nbDelete:
+              Caption := '              Delete';
+            nbPost:
+              Caption := '                Save';
+            nbEdit:
+              Caption := '              Edit';
+            nbCancel:
+              Caption := '                   Cancel';
+            nbFirst:
+              Caption := '               First';
+            nbLast:
+              Caption := '               Last';
+            nbNext:
+              Caption := '                Next';
+            nbPrior:
+              Caption := '                    Previous';
+            nbRefresh:
+              Caption := '                    Refresh';
+          end;
+        end;
+  end;
+end;
 
 procedure TfrmBookings.SyncBookingStatus();
 var
@@ -133,7 +174,7 @@ begin
     btnCheckOut.Enabled := False;
     btnCancel.Enabled := True;
     edRatePerNight.ReadOnly := False;
-    edSettledAmount.ReadOnly := False;
+    // edSettledAmount.ReadOnly := False;
     cmbRoomNo.Enabled := True;
     DTPCheckIn.Enabled := True;
     DTPCheckOut.Enabled := True;
@@ -147,7 +188,7 @@ begin
     btnCancel.Enabled := True;
     edRatePerNight.ReadOnly := True;
     cmbRoomNo.Enabled := False;
-    edSettledAmount.ReadOnly := False;
+    // edSettledAmount.ReadOnly := False;
     DTPCheckIn.Enabled := False;
     DTPCheckOut.Enabled := False;
     btnSave.Enabled := True;
@@ -161,7 +202,7 @@ begin
     btnCancel.Enabled := True;
     edRatePerNight.ReadOnly := True;
     cmbRoomNo.Enabled := False;
-    edSettledAmount.ReadOnly := True;
+    // edSettledAmount.ReadOnly := True;
     DTPCheckIn.Enabled := False;
     DTPCheckOut.Enabled := False;
   end
@@ -174,9 +215,21 @@ begin
     btnCancel.Enabled := False;
     edRatePerNight.ReadOnly := True;
     cmbRoomNo.Enabled := False;
-    edSettledAmount.ReadOnly := True;
+    // edSettledAmount.ReadOnly := True;
     DTPCheckIn.Enabled := False;
     DTPCheckOut.Enabled := False;
+  end;
+end;
+
+procedure TfrmBookings.tbBookingsAfterEdit(DataSet: TDataSet);
+var
+  BookingStatus: string;
+begin
+  BookingStatus := tbBookings.FieldByName('status').AsString;
+  if (BookingStatus = 'CheckedOut') or (BookingStatus = 'Canceled') then
+  begin
+    tbBookings.Cancel;
+    raise Exception.Create('Can''t edit a booking with ' + BookingStatus + ' status!');
   end;
 end;
 
@@ -248,7 +301,8 @@ var
 begin
   arr_cols_labels := ['ID', 'Payment No', 'Date', 'Method', 'Amount (USD)'];
   arr_cols_sizes := [25, 150, 100, 300, 300];
-  arr_cols_names := ['payment_id', 'payment_num', 'payment_date', 'payment_type', 'usd_equivalent'];
+  arr_cols_names := ['payment_id', 'payment_num', 'payment_date',
+    'payment_type', 'usd_equivalent'];
 
   for c in [0 .. 4] do
   begin
@@ -308,7 +362,7 @@ begin
         if Not VarIsNull(FieldByName(arr_cols_names[c]).Value) then
           sgGuests.Cells[c, r] := FieldByName(arr_cols_names[c]).Value;
       Next;
-      Inc(r);
+      inc(r);
     end;
   end;
 
@@ -350,6 +404,14 @@ begin
     tbBookings.Refresh;
     SyncBookingStatus();
   end;
+end;
+
+procedure TfrmBookings.btnAddPaymentClick(Sender: TObject);
+begin
+ if not assigned(frmPayments) then frmPayments := TfrmPayments.Create(Self);
+ frmPayments.Show;
+ frmPayments.tbPayments.Insert;
+ frmPayments.tbPayments.FieldByName('booking_id').Value := tbBookings.FieldByName('booking_id').Value;
 end;
 
 procedure TfrmBookings.btnCancelClick(Sender: TObject);
@@ -430,7 +492,7 @@ begin
   tbBookings.Open;
   dsRooms.Open;
   PageControl1.ActivePageIndex := 0;
-  frmMain.FillNavButtonsCaptions();
+  FillNavButtonsCaptions();
 end;
 
 procedure TfrmBookings.PageControl1Change(Sender: TObject);
