@@ -79,8 +79,6 @@ object frmMain: TfrmMain
       TabOrder = 3
       StyleName = 'Charcoal Dark Slate'
       OnClick = btnBookingsClick
-      ExplicitLeft = -6
-      ExplicitTop = 67
     end
     object btnRooms: TBitBtn
       Left = 0
