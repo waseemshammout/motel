@@ -3,10 +3,9 @@ object dm: Tdm
   Width = 640
   object con: TFDConnection
     Params.Strings = (
-      'Database=C:\Users\wsham\OneDrive\Desktop\motel\db\db.sdb'
+      'Database=C:\Users\Waseem\Desktop\motel\motel\db\db.sdb'
       'LockingMode=Normal'
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 16

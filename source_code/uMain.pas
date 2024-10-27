@@ -22,7 +22,6 @@ type
     btnReports: TBitBtn;
     Panel3: TPanel;
     Panel4: TPanel;
-    DBNavigator1: TDBNavigator;
     procedure btnRoomsClick(Sender: TObject);
     procedure btnBookingsClick(Sender: TObject);
     procedure btnExitClick(Sender: TObject);

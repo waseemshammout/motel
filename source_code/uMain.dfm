@@ -79,6 +79,8 @@ object frmMain: TfrmMain
       TabOrder = 3
       StyleName = 'Charcoal Dark Slate'
       OnClick = btnBookingsClick
+      ExplicitLeft = -6
+      ExplicitTop = 67
     end
     object btnRooms: TBitBtn
       Left = 0
@@ -143,13 +145,5 @@ object frmMain: TfrmMain
     TabOrder = 4
     StyleName = 'Charcoal Dark Slate'
     ExplicitHeight = 507
-  end
-  object DBNavigator1: TDBNavigator
-    Left = 424
-    Top = 336
-    Width = 240
-    Height = 25
-    TabOrder = 5
-    Visible = False
   end
 end
