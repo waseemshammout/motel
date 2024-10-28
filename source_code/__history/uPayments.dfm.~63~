@@ -15,6 +15,7 @@ object frmPayments: TfrmPayments
   Visible = True
   WindowState = wsMaximized
   OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
   TextHeight = 15
   object Shape1: TShape
     Left = 40
@@ -199,11 +200,9 @@ object frmPayments: TfrmPayments
     Width = 934
     Height = 25
     DataSource = DataSource1
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbEdit, nbPost, nbCancel, nbRefresh]
     Align = alBottom
     TabOrder = 9
-    ExplicitLeft = 8
-    ExplicitTop = 307
-    ExplicitWidth = 490
   end
   object cmbBooking: TDBLookupComboBox
     Left = 436
@@ -222,13 +221,13 @@ object frmPayments: TfrmPayments
     ListSource = DataSource2
     ParentFont = False
     TabOrder = 4
+    OnClick = cmbBookingClick
   end
   object cmbType: TDBComboBox
     Left = 272
     Top = 144
     Width = 145
     Height = 27
-    Style = csDropDownList
     DataField = 'payment_type'
     DataSource = DataSource1
     Font.Charset = DEFAULT_CHARSET
@@ -321,6 +320,8 @@ object frmPayments: TfrmPayments
   end
   object tbPayments: TFDTable
     AfterInsert = tbPaymentsAfterInsert
+    AfterEdit = tbPaymentsAfterEdit
+    BeforePost = tbPaymentsBeforePost
     AfterPost = tbPaymentsAfterPost
     AfterScroll = tbPaymentsAfterScroll
     IndexFieldNames = 'payment_id'
@@ -379,6 +380,7 @@ object frmPayments: TfrmPayments
     end
   end
   object DataSource1: TDataSource
+    AutoEdit = False
     DataSet = tbPayments
     Left = 128
     Top = 376

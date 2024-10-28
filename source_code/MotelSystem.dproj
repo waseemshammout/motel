@@ -121,6 +121,10 @@
         <DCCReference Include="uPayments.pas">
             <Form>frmPayments</Form>
         </DCCReference>
+        <DCCReference Include="uGuests.pas">
+            <Form>frmGuests</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

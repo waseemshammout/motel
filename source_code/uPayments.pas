@@ -161,20 +161,19 @@ end;
 procedure TfrmPayments.FormCreate(Sender: TObject);
 begin
   tbPayments.Open;
+  tbBooking.Open;
   UpdateBookingBalance();
 end;
 
 procedure TfrmPayments.FormDeactivate(Sender: TObject);
 begin
-//  if (tbPayments.State = dsEdit) or (tbPayments.State = dsInsert) then
-//   if MessageDlg('The input data will be lost, do you want to continue?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then tbPayments.Cancel;
-//    raise Exception.Create('Error Message');
+ if (tbPayments.State = dsEdit) or (tbPayments.State = dsInsert) then tbPayments.Cancel;
 end;
 
 procedure TfrmPayments.tbPaymentsAfterEdit(DataSet: TDataSet);
 begin
  tbPayments.Cancel;
- raise Exception.Create('Payment info can''t be edited, please contact the administrator!');
+ raise Exception.Create('Please contact the administrator to edit payment information!');
 end;
 
 procedure TfrmPayments.tbPaymentsAfterInsert(DataSet: TDataSet);

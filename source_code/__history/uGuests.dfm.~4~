@@ -1,0 +1,283 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 667
+  ClientWidth = 984
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  WindowState = wsMaximized
+  TextHeight = 15
+  object Label1: TLabel
+    Left = 32
+    Top = 40
+    Width = 44
+    Height = 15
+    Caption = 'guest_id'
+    FocusControl = DBEdit1
+  end
+  object Label2: TLabel
+    Left = 32
+    Top = 88
+    Width = 57
+    Height = 15
+    Caption = 'First Name'
+    FocusControl = DBEdit2
+  end
+  object Label3: TLabel
+    Left = 158
+    Top = 88
+    Width = 56
+    Height = 15
+    Caption = 'Last Name'
+    FocusControl = DBEdit3
+  end
+  object Label4: TLabel
+    Left = 284
+    Top = 88
+    Width = 66
+    Height = 15
+    Caption = 'Date of Birth'
+    FocusControl = DBEdit4
+  end
+  object Label5: TLabel
+    Left = 410
+    Top = 88
+    Width = 71
+    Height = 15
+    Caption = 'Birth Country'
+    FocusControl = DBEdit5
+  end
+  object Label6: TLabel
+    Left = 536
+    Top = 88
+    Width = 30
+    Height = 15
+    Caption = 'ID No'
+    FocusControl = DBEdit6
+  end
+  object Label7: TLabel
+    Left = 662
+    Top = 88
+    Width = 38
+    Height = 15
+    Caption = 'ID Type'
+    FocusControl = DBEdit7
+  end
+  object Label8: TLabel
+    Left = 32
+    Top = 376
+    Width = 18
+    Height = 15
+    Caption = 'Sex'
+    FocusControl = DBEdit8
+  end
+  object Label9: TLabel
+    Left = 32
+    Top = 424
+    Width = 34
+    Height = 15
+    Caption = 'Phone'
+    FocusControl = DBEdit9
+  end
+  object Label10: TLabel
+    Left = 32
+    Top = 472
+    Width = 29
+    Height = 15
+    Caption = 'Email'
+    FocusControl = DBEdit10
+  end
+  object Label11: TLabel
+    Left = 32
+    Top = 520
+    Width = 62
+    Height = 15
+    Caption = 'guardian_id'
+    FocusControl = DBEdit11
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 0
+    Top = 642
+    Width = 984
+    Height = 25
+    Align = alBottom
+    TabOrder = 0
+    ExplicitLeft = 376
+    ExplicitTop = 296
+    ExplicitWidth = 240
+  end
+  object DBEdit1: TDBEdit
+    Left = 32
+    Top = 56
+    Width = 120
+    Height = 23
+    DataField = 'guest_id'
+    DataSource = DataSource1
+    TabOrder = 1
+  end
+  object DBEdit2: TDBEdit
+    Left = 32
+    Top = 104
+    Width = 120
+    Height = 23
+    DataField = 'first_name'
+    DataSource = DataSource1
+    TabOrder = 2
+  end
+  object DBEdit3: TDBEdit
+    Left = 158
+    Top = 104
+    Width = 120
+    Height = 23
+    DataField = 'last_name'
+    DataSource = DataSource1
+    TabOrder = 3
+  end
+  object DBEdit4: TDBEdit
+    Left = 284
+    Top = 104
+    Width = 120
+    Height = 23
+    DataField = 'date_of_birth'
+    DataSource = DataSource1
+    TabOrder = 4
+  end
+  object DBEdit5: TDBEdit
+    Left = 410
+    Top = 104
+    Width = 120
+    Height = 23
+    DataField = 'birth_country'
+    DataSource = DataSource1
+    TabOrder = 5
+  end
+  object DBEdit6: TDBEdit
+    Left = 536
+    Top = 104
+    Width = 120
+    Height = 23
+    DataField = 'id_number'
+    DataSource = DataSource1
+    TabOrder = 6
+  end
+  object DBEdit7: TDBEdit
+    Left = 662
+    Top = 104
+    Width = 120
+    Height = 23
+    DataField = 'id_type'
+    DataSource = DataSource1
+    TabOrder = 7
+  end
+  object DBEdit8: TDBEdit
+    Left = 32
+    Top = 392
+    Width = 120
+    Height = 23
+    DataField = 'sex'
+    DataSource = DataSource1
+    TabOrder = 8
+  end
+  object DBEdit9: TDBEdit
+    Left = 32
+    Top = 440
+    Width = 120
+    Height = 23
+    DataField = 'phone'
+    DataSource = DataSource1
+    TabOrder = 9
+  end
+  object DBEdit10: TDBEdit
+    Left = 32
+    Top = 488
+    Width = 120
+    Height = 23
+    DataField = 'email'
+    DataSource = DataSource1
+    TabOrder = 10
+  end
+  object DBEdit11: TDBEdit
+    Left = 32
+    Top = 536
+    Width = 120
+    Height = 23
+    DataField = 'guardian_id'
+    DataSource = DataSource1
+    TabOrder = 11
+  end
+  object tbGuests: TFDTable
+    IndexFieldNames = 'guest_id'
+    Connection = dm.con
+    ResourceOptions.AssignedValues = [rvEscapeExpand]
+    TableName = 'guests'
+    Left = 936
+    Top = 584
+    object tbGuestsguest_id: TFDAutoIncField
+      FieldName = 'guest_id'
+      Origin = 'guest_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object tbGuestsfirst_name: TStringField
+      FieldName = 'first_name'
+      Origin = 'first_name'
+      Size = 100
+    end
+    object tbGuestslast_name: TStringField
+      FieldName = 'last_name'
+      Origin = 'last_name'
+      Size = 100
+    end
+    object tbGuestsdate_of_birth: TDateField
+      FieldName = 'date_of_birth'
+      Origin = 'date_of_birth'
+    end
+    object tbGuestsbirth_country: TStringField
+      FieldName = 'birth_country'
+      Origin = 'birth_country'
+      Size = 100
+    end
+    object tbGuestsid_number: TStringField
+      FieldName = 'id_number'
+      Origin = 'id_number'
+      Size = 100
+    end
+    object tbGuestsid_type: TStringField
+      FieldName = 'id_type'
+      Origin = 'id_type'
+      Size = 100
+    end
+    object tbGuestssex: TStringField
+      FieldName = 'sex'
+      Origin = 'sex'
+      Size = 100
+    end
+    object tbGuestsphone: TStringField
+      FieldName = 'phone'
+      Origin = 'phone'
+      Size = 100
+    end
+    object tbGuestsemail: TStringField
+      FieldName = 'email'
+      Origin = 'email'
+      Size = 100
+    end
+    object tbGuestsguardian_id: TIntegerField
+      FieldName = 'guardian_id'
+      Origin = 'guardian_id'
+    end
+    object tbGuestscreated_at: TSQLTimeStampField
+      FieldName = 'created_at'
+      Origin = 'created_at'
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = tbGuests
+    Left = 888
+    Top = 584
+  end
+end

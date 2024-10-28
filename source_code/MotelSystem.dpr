@@ -8,7 +8,8 @@ uses
   uRooms in 'uRooms.pas' {frmRooms},
   uDataModule in 'uDataModule.pas' {dm: TDataModule},
   uBookings in 'uBookings.pas' {frmBookings},
-  uPayments in 'uPayments.pas' {frmPayments};
+  uPayments in 'uPayments.pas' {frmPayments},
+  uGuests in 'uGuests.pas' {frmGuests};
 
 {$R *.res}
 

@@ -68,6 +68,7 @@ object frmMain: TfrmMain
       Caption = 'Guests'
       TabOrder = 2
       StyleName = 'Charcoal Dark Slate'
+      OnClick = btnGuestsClick
     end
     object btnBookings: TBitBtn
       Left = 0

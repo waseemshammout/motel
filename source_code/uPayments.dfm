@@ -228,7 +228,6 @@ object frmPayments: TfrmPayments
     Top = 144
     Width = 145
     Height = 27
-    Style = csDropDownList
     DataField = 'payment_type'
     DataSource = DataSource1
     Font.Charset = DEFAULT_CHARSET

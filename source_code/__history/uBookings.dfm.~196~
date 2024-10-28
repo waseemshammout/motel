@@ -62,7 +62,7 @@ object frmBookings: TfrmBookings
     Top = 95
     Width = 1020
     Height = 329
-    ActivePage = TabSheet4
+    ActivePage = TabSheet3
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
@@ -182,13 +182,6 @@ object frmBookings: TfrmBookings
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
-      end
-      object Shape1: TShape
-        Left = 656
-        Top = 33
-        Width = 321
-        Height = 224
-        Brush.Style = bsClear
       end
       object edStatus: TDBEdit
         Left = 215
@@ -355,70 +348,60 @@ object frmBookings: TfrmBookings
         ReadOnly = True
         TabOrder = 9
       end
-      object Button1: TButton
-        Left = 3
-        Top = 268
-        Width = 75
-        Height = 25
-        Caption = 'Button1'
-        TabOrder = 10
-        Visible = False
-        OnClick = Button1Click
-      end
       object btnSave: TButton
-        Left = 677
-        Top = 58
+        Left = 733
+        Top = 36
         Width = 108
         Height = 25
         Caption = 'Save'
         ImageIndex = 1
         Images = ImageList1
-        TabOrder = 11
+        TabOrder = 10
         Visible = False
         OnClick = btnSaveClick
       end
       object btnConfirm: TButton
-        Left = 677
-        Top = 107
+        Left = 733
+        Top = 84
         Width = 108
         Height = 25
         Caption = 'Confirm'
         ImageIndex = 0
         Images = ImageList1
-        TabOrder = 12
+        TabOrder = 11
         OnClick = btnConfirmClick
       end
       object btnCheckIn: TButton
-        Left = 677
-        Top = 159
+        Left = 733
+        Top = 133
         Width = 108
         Height = 25
         Caption = 'Check In'
         ImageIndex = 2
         Images = ImageList1
-        TabOrder = 13
+        TabOrder = 12
         OnClick = btnCheckInClick
       end
       object btnCheckOut: TButton
-        Left = 677
-        Top = 206
+        Left = 733
+        Top = 184
         Width = 108
         Height = 25
         Caption = 'Check Out'
         ImageIndex = 3
         Images = ImageList1
-        TabOrder = 14
+        TabOrder = 13
         OnClick = btnCheckOutClick
       end
       object btnCancel: TButton
-        Left = 828
-        Top = 207
+        Left = 868
+        Top = 182
         Width = 90
         Height = 25
         Caption = 'Cancel'
         ImageIndex = 4
         Images = ImageList1
-        TabOrder = 15
+        TabOrder = 14
         OnClick = btnCancelClick
       end
     end
@@ -449,7 +432,7 @@ object frmBookings: TfrmBookings
         Height = 237
         ColCount = 11
         FixedCols = 0
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goRowSelect, goFixedRowDefAlign]
         TabOrder = 2
       end
       object btnPopulate: TButton
@@ -472,8 +455,9 @@ object frmBookings: TfrmBookings
         Width = 899
         Height = 214
         FixedCols = 0
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goRowSelect, goFixedRowDefAlign]
         TabOrder = 0
+        OnDblClick = sgPaymentsDblClick
       end
       object btnAddPayment: TButton
         Left = 3
@@ -483,6 +467,16 @@ object frmBookings: TfrmBookings
         Caption = 'Add'
         TabOrder = 1
         OnClick = btnAddPaymentClick
+      end
+      object Button1: TButton
+        Left = 443
+        Top = 25
+        Width = 75
+        Height = 25
+        Caption = 'Button1'
+        TabOrder = 2
+        Visible = False
+        OnClick = Button1Click
       end
     end
     object TabSheet2: TTabSheet

@@ -6,7 +6,9 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   uRooms in 'uRooms.pas' {frmRooms},
-  uDataModule in 'uDataModule.pas' {dm: TDataModule};
+  uDataModule in 'uDataModule.pas' {dm: TDataModule},
+  uBookings in 'uBookings.pas' {frmBookings},
+  uPayments in 'uPayments.pas' {frmPayments};
 
 {$R *.res}
 

@@ -20,7 +20,8 @@ object frmMain: TfrmMain
     Width = 1076
     Height = 19
     Panels = <>
-    ExplicitTop = 730
+    StyleName = 'Charcoal Dark Slate'
+    ExplicitTop = 644
     ExplicitWidth = 1074
   end
   object Panel1: TPanel
@@ -33,8 +34,8 @@ object frmMain: TfrmMain
     Color = clBtnText
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 361
-    ExplicitHeight = 369
+    StyleName = 'Charcoal Dark Slate'
+    ExplicitHeight = 507
     object btnExit: TBitBtn
       Left = 0
       Top = 438
@@ -43,8 +44,9 @@ object frmMain: TfrmMain
       Align = alBottom
       Caption = 'Exit'
       TabOrder = 0
+      StyleName = 'Charcoal Dark Slate'
       OnClick = btnExitClick
-      ExplicitTop = 296
+      ExplicitTop = 434
     end
     object btnPayments: TBitBtn
       Left = 0
@@ -54,6 +56,8 @@ object frmMain: TfrmMain
       Align = alTop
       Caption = 'Payments'
       TabOrder = 1
+      StyleName = 'Charcoal Dark Slate'
+      OnClick = btnPaymentsClick
     end
     object btnGuests: TBitBtn
       Left = 0
@@ -63,6 +67,8 @@ object frmMain: TfrmMain
       Align = alTop
       Caption = 'Guests'
       TabOrder = 2
+      StyleName = 'Charcoal Dark Slate'
+      OnClick = btnGuestsClick
     end
     object btnBookings: TBitBtn
       Left = 0
@@ -72,6 +78,7 @@ object frmMain: TfrmMain
       Align = alTop
       Caption = 'Bookings'
       TabOrder = 3
+      StyleName = 'Charcoal Dark Slate'
       OnClick = btnBookingsClick
     end
     object btnRooms: TBitBtn
@@ -93,6 +100,7 @@ object frmMain: TfrmMain
       Align = alTop
       Caption = 'Settings'
       TabOrder = 5
+      StyleName = 'Charcoal Dark Slate'
     end
     object btnReports: TBitBtn
       Left = 0
@@ -102,6 +110,7 @@ object frmMain: TfrmMain
       Align = alTop
       Caption = 'Reports'
       TabOrder = 6
+      StyleName = 'Charcoal Dark Slate'
     end
   end
   object Panel2: TPanel
@@ -113,6 +122,8 @@ object frmMain: TfrmMain
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 2
+    StyleName = 'Charcoal Dark Slate'
+    ExplicitWidth = 1074
   end
   object Panel3: TPanel
     Left = 0
@@ -121,7 +132,7 @@ object frmMain: TfrmMain
     Height = 8
     Align = alTop
     TabOrder = 3
-    ExplicitTop = 353
+    StyleName = 'Charcoal Dark Slate'
     ExplicitWidth = 1074
   end
   object Panel4: TPanel
@@ -131,7 +142,7 @@ object frmMain: TfrmMain
     Height = 511
     Align = alLeft
     TabOrder = 4
-    ExplicitTop = 361
-    ExplicitHeight = 369
+    StyleName = 'Charcoal Dark Slate'
+    ExplicitHeight = 507
   end
 end
