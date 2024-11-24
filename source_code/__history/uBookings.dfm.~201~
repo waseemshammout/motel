@@ -183,13 +183,6 @@ object frmBookings: TfrmBookings
         Font.Style = []
         ParentFont = False
       end
-      object Shape1: TShape
-        Left = 656
-        Top = 33
-        Width = 321
-        Height = 224
-        Brush.Style = bsClear
-      end
       object edStatus: TDBEdit
         Left = 215
         Top = 56
@@ -311,7 +304,6 @@ object frmBookings: TfrmBookings
         Top = 204
         Width = 154
         Height = 27
-        CustomHint = BalloonHint1
         DataField = 'rate_per_night'
         DataSource = DataSource1
         Font.Charset = DEFAULT_CHARSET
@@ -356,8 +348,8 @@ object frmBookings: TfrmBookings
         TabOrder = 9
       end
       object btnSave: TButton
-        Left = 677
-        Top = 58
+        Left = 733
+        Top = 36
         Width = 108
         Height = 25
         Caption = 'Save'
@@ -368,8 +360,8 @@ object frmBookings: TfrmBookings
         OnClick = btnSaveClick
       end
       object btnConfirm: TButton
-        Left = 677
-        Top = 107
+        Left = 733
+        Top = 84
         Width = 108
         Height = 25
         Caption = 'Confirm'
@@ -379,8 +371,8 @@ object frmBookings: TfrmBookings
         OnClick = btnConfirmClick
       end
       object btnCheckIn: TButton
-        Left = 677
-        Top = 159
+        Left = 733
+        Top = 133
         Width = 108
         Height = 25
         Caption = 'Check In'
@@ -390,8 +382,8 @@ object frmBookings: TfrmBookings
         OnClick = btnCheckInClick
       end
       object btnCheckOut: TButton
-        Left = 677
-        Top = 206
+        Left = 733
+        Top = 184
         Width = 108
         Height = 25
         Caption = 'Check Out'
@@ -401,8 +393,8 @@ object frmBookings: TfrmBookings
         OnClick = btnCheckOutClick
       end
       object btnCancel: TButton
-        Left = 828
-        Top = 207
+        Left = 868
+        Top = 182
         Width = 90
         Height = 25
         Caption = 'Cancel'
@@ -439,7 +431,7 @@ object frmBookings: TfrmBookings
         Height = 237
         ColCount = 11
         FixedCols = 0
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goRowSelect, goFixedRowDefAlign]
         TabOrder = 2
       end
       object btnPopulate: TButton
@@ -462,15 +454,16 @@ object frmBookings: TfrmBookings
         Width = 899
         Height = 214
         FixedCols = 0
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goColMoving, goRowSelect, goFixedRowDefAlign]
         TabOrder = 0
+        OnDblClick = sgPaymentsDblClick
       end
       object btnAddPayment: TButton
         Left = 3
         Top = 25
-        Width = 75
+        Width = 142
         Height = 25
-        Caption = 'Add'
+        Caption = 'Add Payment'
         TabOrder = 1
         OnClick = btnAddPaymentClick
       end
