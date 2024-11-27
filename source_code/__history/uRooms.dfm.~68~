@@ -3,11 +3,9 @@ object frmRooms: TfrmRooms
   Top = 0
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
-  Align = alClient
-  BorderStyle = bsNone
   Caption = 'Room'
-  ClientHeight = 477
-  ClientWidth = 1241
+  ClientHeight = 534
+  ClientWidth = 920
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,7 +13,7 @@ object frmRooms: TfrmRooms
   Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIChild
-  Position = poDesigned
+  Position = poScreenCenter
   Visible = True
   WindowState = wsMaximized
   OnClose = FormClose
@@ -39,7 +37,7 @@ object frmRooms: TfrmRooms
   object SG1: TStringGrid
     Left = 0
     Top = 0
-    Width = 1241
+    Width = 920
     Height = 265
     Align = alTop
     ColCount = 7
@@ -49,6 +47,7 @@ object frmRooms: TfrmRooms
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goFixedRowClick, goFixedRowDefAlign]
     TabOrder = 0
     OnDblClick = SG1DblClick
+    ExplicitWidth = 918
   end
   object CheckBox1: TCheckBox
     Left = 152
